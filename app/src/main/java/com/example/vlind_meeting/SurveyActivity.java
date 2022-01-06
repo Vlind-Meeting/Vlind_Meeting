@@ -17,9 +17,10 @@ import java.util.Collections;
 public class SurveyActivity extends AppCompatActivity implements FragmentListener {
 
     private int q1, q2, q3, q4, q5, q6, q7, q8, q9;
-    private String q10;
-    private String user_name, user_password, user_gender, user_number;
+    private String q10, voice;
+    private String user_voice, user_name, user_password, user_gender, user_number;
 
+    RecordFragment frameRecord;
     Q1Fragment frameQ1;
     Q2Fragment frameQ2;
     Q3Fragment frameQ3;
@@ -37,6 +38,7 @@ public class SurveyActivity extends AppCompatActivity implements FragmentListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey_main);
+        frameRecord = new RecordFragment();
         frameQ1 = new Q1Fragment();
         frameQ2 = new Q2Fragment();
         frameQ3 = new Q3Fragment();
@@ -49,6 +51,7 @@ public class SurveyActivity extends AppCompatActivity implements FragmentListene
         frameQ10 = new Q10Fragment();
 
         Intent intent = getIntent();
+        user_voice = intent.getExtras().getString("user_voice");
         user_gender = intent.getExtras().getString("user_gender");
         user_password = intent.getExtras().getString("user_password");
         user_name = intent.getExtras().getString("user_name");
@@ -56,8 +59,18 @@ public class SurveyActivity extends AppCompatActivity implements FragmentListene
 
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frame_layout, frameQ1).commit();
+//        transaction.replace(R.id.frame_layout, frameQ1).commit();
+        transaction.replace(R.id.frame_layout, frameRecord).commit();
 
+    }
+
+    public void setRecord(String s){
+        voice=s;
+    }
+
+    public void nextRecord(){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_layout, frameQ1).commit();
     }
 
 

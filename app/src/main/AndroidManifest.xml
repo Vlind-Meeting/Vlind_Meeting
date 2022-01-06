@@ -12,7 +12,7 @@
         <activity
             android:name="com.example.vlind_meeting.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat">
+            android:theme="@style/Theme.VlindMeeting.">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,22 +22,22 @@
         <activity
             android:name=".JoinActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat">
+            android:theme="@style/Theme.VlindMeeting.">
         </activity>
         <activity
             android:name=".JoinSurveyActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat">
+            android:theme="@style/Theme.VlindMeeting.">
         </activity>
         <activity
             android:name=".MainAppActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat">
+            android:theme="@style/Theme.VlindMeeting.">
         </activity>
         <activity
             android:name=".SurveyActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat">
+            android:theme="@style/Theme.VlindMeeting.">
         </activity>
 
     </application>

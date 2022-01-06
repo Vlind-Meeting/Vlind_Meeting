@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.VindMeeting." parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.VlindMeeting." parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/tiffany</item>
         <item name="colorPrimaryVariant">@color/tiffany</item>

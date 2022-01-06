@@ -8,25 +8,29 @@
 
     <CheckBox
         android:id="@+id/check_woman"
-        android:layout_width="97dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="95dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="여"
-        app:layout_constraintBottom_toTopOf="@+id/delete_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toEndOf="@+id/check_man"
-        app:layout_constraintTop_toBottomOf="@+id/join_password" />
+        app:layout_constraintHorizontal_bias="0.568"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.649" />
 
     <CheckBox
         android:id="@+id/check_man"
-        android:layout_width="97dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="남"
-        app:layout_constraintBottom_toTopOf="@+id/join_button"
-        app:layout_constraintStart_toStartOf="@+id/join_password"
-        app:layout_constraintTop_toBottomOf="@+id/join_password" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.377"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65" />
 
     <TextView
         android:id="@+id/textView"
@@ -42,66 +46,72 @@
 
     <EditText
         android:id="@+id/join_name"
-        android:layout_width="210dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="95dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="95dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:ems="10"
         android:hint="이름"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.53" />
 
     <EditText
         android:id="@+id/join_password"
-        android:layout_width="210dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:ems="10"
         android:hint="비밀번호"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/join_number"
-        app:layout_constraintStart_toStartOf="@+id/join_number"
-        app:layout_constraintTop_toBottomOf="@+id/join_number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.434"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/join_number"
-        android:layout_width="210dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:ems="10"
         android:hint="전화번호(숫자만)"
         android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/join_name"
-        app:layout_constraintStart_toStartOf="@+id/join_name"
-        app:layout_constraintTop_toBottomOf="@+id/join_name" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.344" />
 
     <Button
         android:id="@+id/delete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginEnd="85dp"
-        android:layout_marginBottom="140dp"
         android:text="취소"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
-        app:layout_constraintStart_toEndOf="@+id/join_button" />
+        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.786" />
 
     <Button
         android:id="@+id/join_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
-        android:layout_marginBottom="140dp"
-
         android:text="가입"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.294"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.786" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

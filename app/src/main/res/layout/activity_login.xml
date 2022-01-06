@@ -12,64 +12,89 @@
         android:layout_height="match_parent"
         tools:context=".JoinActivity">
 
-        <EditText
-            android:id="@+id/login_name"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-
-            android:layout_marginStart="95dp"
-            android:layout_marginEnd="95dp"
-            android:layout_marginBottom="110dp"
-            android:ems="10"
-            android:hint="이름"
-            android:inputType="textEmailAddress"
-            app:layout_constraintBottom_toTopOf="@+id/mbti"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/login_button"
+            android:layout_width="159dp"
+            android:layout_height="49dp"
+            android:text="로그인"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.533" />
+
+        <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="로그인"
-            app:layout_constraintBaseline_toBaselineOf="@+id/join_button"
-            app:layout_constraintStart_toStartOf="@+id/mbti" />
+            android:text="PW 찾기"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.622" />
 
         <EditText
             android:id="@+id/login_number"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
-
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="40dp"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:hint="전화번호(숫자만)"
             android:inputType="textEmailAddress"
-            app:layout_constraintBottom_toTopOf="@+id/mbti"
-            app:layout_constraintEnd_toEndOf="@+id/login_name"
-            app:layout_constraintStart_toStartOf="@+id/login_name"
-            app:layout_constraintTop_toBottomOf="@+id/login_name" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.295" />
 
         <EditText
             android:id="@+id/mbti"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginBottom="41dp"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:hint="비밀번호"
             android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@+id/login_button"
-            app:layout_constraintStart_toStartOf="@+id/login_number" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.388" />
 
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="아직 회원이 아니신가요?"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.261"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/join_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.86" />
 
         <Button
             android:id="@+id/join_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="190dp"
             android:text="회원가입"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/mbti" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.756"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.875" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

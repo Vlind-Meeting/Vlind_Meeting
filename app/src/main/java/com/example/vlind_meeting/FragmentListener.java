@@ -1,6 +1,8 @@
 package com.example.vlind_meeting;
 
 public interface FragmentListener {
+    public void setRecord(String s);
+    public void nextRecord();
     public void setQ1(int i);
     public void nextQ1();
     public void setQ2(int i);

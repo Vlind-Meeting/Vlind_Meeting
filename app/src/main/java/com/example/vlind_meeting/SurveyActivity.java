@@ -1,12 +1,17 @@
 package com.example.vlind_meeting;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,10 +21,17 @@ import java.util.Collections;
 
 public class SurveyActivity extends AppCompatActivity implements FragmentListener {
 
-    private int q1, q2, q3, q4, q5, q6, q7, q8, q9;
-    private String q10;
-    private String user_name, user_password, user_gender, user_number;
+    String[] permission_list = {
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
 
+    private int q1, q2, q3, q4, q5, q6, q7, q8, q9;
+    private String q10, voice;
+    private String user_voice, user_name, user_password, user_gender, user_number, user_nickname;
+
+    RecordFragment frameRecord;
     Q1Fragment frameQ1;
     Q2Fragment frameQ2;
     Q3Fragment frameQ3;
@@ -37,6 +49,9 @@ public class SurveyActivity extends AppCompatActivity implements FragmentListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey_main);
+        checkPermission();
+
+        frameRecord = new RecordFragment();
         frameQ1 = new Q1Fragment();
         frameQ2 = new Q2Fragment();
         frameQ3 = new Q3Fragment();
@@ -49,15 +64,27 @@ public class SurveyActivity extends AppCompatActivity implements FragmentListene
         frameQ10 = new Q10Fragment();
 
         Intent intent = getIntent();
+        user_voice = intent.getExtras().getString("user_voice");
         user_gender = intent.getExtras().getString("user_gender");
         user_password = intent.getExtras().getString("user_password");
         user_name = intent.getExtras().getString("user_name");
         user_number = intent.getExtras().getString("user_number");
+        user_nickname = intent.getExtras().getString("user_nickname");
 
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frame_layout, frameQ1).commit();
+//        transaction.replace(R.id.frame_layout, frameQ1).commit();
+        transaction.replace(R.id.frame_layout, frameRecord).commit();
 
+    }
+
+    public void setRecord(String s){
+        voice=s;
+    }
+
+    public void nextRecord(){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_layout, frameQ1).commit();
     }
 
 
@@ -178,6 +205,42 @@ public class SurveyActivity extends AppCompatActivity implements FragmentListene
                 + Math.pow(x7-q7,2)*1.04 + Math.pow(x8-q8,2)*0.96 + Math.pow(x9-q9, 2))*0.95/9);
         return result;
     }
+
+    public void checkPermission(){
+        //현재 안드로이드 버전이 6.0미만이면 메서드를 종료한다.
+        //안드로이드6.0 (마시멜로) 이후 버전부터 유저 권한설정 필요
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+            return;
+
+        for(String permission : permission_list){
+            //권한 허용 여부를 확인한다.
+            int chk = checkCallingOrSelfPermission(permission);
+
+            if(chk == PackageManager.PERMISSION_DENIED){
+                //권한 허용을여부를 확인하는 창을 띄운다
+                requestPermissions(permission_list,0);
+            }
+        }
+    }
+
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode==0)
+        {
+            for(int i=0; i<grantResults.length; i++)
+            {
+                //허용됬다면
+                if(grantResults[i]==PackageManager.PERMISSION_GRANTED){
+                }
+                else {
+                    //권한을 하나라도 허용하지 않는다면 앱 종료
+                    Toast.makeText(getApplicationContext(),"앱권한설정하세요",Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            }
+        }
+    }
+
 
 
 }

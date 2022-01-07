@@ -6,102 +6,183 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <CheckBox
-        android:id="@+id/check_woman"
-        android:layout_width="97dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="95dp"
-        android:text="여"
-        app:layout_constraintBottom_toTopOf="@+id/delete_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toEndOf="@+id/check_man"
-        app:layout_constraintTop_toBottomOf="@+id/join_password" />
-
-    <CheckBox
-        android:id="@+id/check_man"
-        android:layout_width="97dp"
-        android:layout_height="50dp"
-        android:text="남"
-        app:layout_constraintBottom_toTopOf="@+id/join_button"
-        app:layout_constraintStart_toStartOf="@+id/join_password"
-        app:layout_constraintTop_toBottomOf="@+id/join_password" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:fontFamily="@font/title"
         android:text="회원가입"
-        android:textSize="30sp"
-        android:textStyle="bold"
+        android:textSize="45dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13" />
 
     <EditText
         android:id="@+id/join_name"
-        android:layout_width="210dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="95dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="95dp"
+        android:layout_width="235dp"
+        android:layout_height="49dp"
+        android:background="@drawable/edittext"
+        android:elevation="3dp"
         android:ems="10"
+        android:fontFamily="@font/basic"
         android:hint="이름"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.556"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <EditText
-        android:id="@+id/join_password"
-        android:layout_width="210dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:hint="비밀번호"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/join_number"
-        app:layout_constraintStart_toStartOf="@+id/join_number"
-        app:layout_constraintTop_toBottomOf="@+id/join_number"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.302" />
 
     <EditText
         android:id="@+id/join_number"
-        android:layout_width="210dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="235dp"
+        android:layout_height="49dp"
+        android:background="@drawable/edittext"
+        android:elevation="3dp"
         android:ems="10"
+        android:fontFamily="@font/basic"
         android:hint="전화번호(숫자만)"
         android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/join_name"
-        app:layout_constraintStart_toStartOf="@+id/join_name"
-        app:layout_constraintTop_toBottomOf="@+id/join_name" />
-
-    <Button
-        android:id="@+id/delete_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginEnd="85dp"
-        android:layout_marginBottom="140dp"
-        android:text="취소"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
-        app:layout_constraintStart_toEndOf="@+id/join_button" />
+        app:layout_constraintHorizontal_bias="0.556"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.529" />
+
+    <EditText
+        android:id="@+id/join_nickname"
+        android:layout_width="235dp"
+        android:layout_height="49dp"
+        android:background="@drawable/edittext"
+        android:elevation="3dp"
+        android:ems="10"
+        android:fontFamily="@font/basic"
+        android:hint="닉네임"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.556"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.414" />
+
+    <EditText
+        android:id="@+id/join_password"
+        android:layout_width="235dp"
+        android:layout_height="49dp"
+        android:background="@drawable/edittext"
+        android:elevation="3dp"
+        android:ems="10"
+        android:fontFamily="@font/basic"
+        android:hint="비밀번호"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.556"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.64"
+        tools:ignore="MissingConstraints" />
+
+    <CheckBox
+        android:id="@+id/check_man"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/checkbox_style"
+        android:button="@null"
+        android:fontFamily="@font/basic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.312"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.768" />
+
+    <ImageView
+        android:layout_width="53dp"
+        android:layout_height="45dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.405"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.773"
+        app:srcCompat="@drawable/man" />
 
     <Button
         android:id="@+id/join_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
-        android:layout_marginBottom="140dp"
-
+        android:layout_width="82dp"
+        android:layout_height="40dp"
+        android:background="@drawable/btn_style"
+        android:backgroundTint="@color/tiffany"
+        android:fontFamily="@font/basic"
+        android:textColor="@color/white"
         android:text="가입"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.361"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.907" />
+
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="82dp"
+        android:layout_height="40dp"
+        android:background="@drawable/btn_style"
+        android:backgroundTint="@color/tiffany"
+        android:fontFamily="@font/basic"
+        android:text="취소"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.907" />
+
+    <ImageView
+        android:layout_width="23dp"
+        android:layout_height="131dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.729"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.826"
+        app:srcCompat="@drawable/woman" />
+
+    <CheckBox
+        android:id="@+id/check_woman"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/checkbox_style"
+        android:button="@null"
+        android:fontFamily="@font/basic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.632"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.768" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

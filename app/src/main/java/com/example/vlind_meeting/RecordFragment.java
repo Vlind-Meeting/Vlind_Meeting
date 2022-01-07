@@ -10,6 +10,7 @@ import android.media.MediaDataSource;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,12 +37,12 @@ import pl.droidsonroids.gif.GifImageView;
 public class RecordFragment extends Fragment{
     private Button next_button;
     private Button record;
-    private Button listen;
+//    private Button listen;
     private ViewGroup viewgroup;
     private GifImageView gif_img;
     private GifDrawable gif;
-    private ImageView record_start;
-    private ImageView record_stop;
+    private TextView record_state;
+    private TextView record_info;
 
     FragmentListener fragmentListener;
     MediaRecorder recorder;
@@ -79,10 +81,12 @@ public class RecordFragment extends Fragment{
 
         next_button = (Button) viewgroup.findViewById(R.id.next_button);
         record = (Button) viewgroup.findViewById(R.id.record);
-        listen = (Button) viewgroup.findViewById(R.id.listen);
+        record_state = (TextView) viewgroup.findViewById(R.id.record_state);
+        record_info = (TextView) viewgroup.findViewById(R.id.record_info);
+//        listen = (Button) viewgroup.findViewById(R.id.listen);
 
         record.bringToFront();
-        listen.bringToFront();
+//        listen.bringToFront();
         next_button.bringToFront();
 
         try {
@@ -105,6 +109,8 @@ public class RecordFragment extends Fragment{
             public void onClick(View view) {
                 if(n%3==0){
                     gif.start();
+                    record_state.setText("Recording");
+                    record_info.setText("press to save");
                     if (recorder == null) {
                         recorder = new MediaRecorder(); // 미디어리코더 객체 생성
                     }
@@ -121,6 +127,8 @@ public class RecordFragment extends Fragment{
                 }
                 else if(n%3==1){
                     gif.stop();
+                    record_state.setText("Saved");
+                    record_info.setText("press to play");
                     if (recorder != null) {
                         recorder.stop();
                         recorder.release();
@@ -130,6 +138,8 @@ public class RecordFragment extends Fragment{
                 }
                 else{
                     gif.start();
+                    record_state.setText("Playing");
+                    record_info.setText("press to rerecord");
                     try {
                         if(mediaPlayer != null){    // 사용하기 전에
                             mediaPlayer.release();  // 리소스 해제
@@ -151,29 +161,29 @@ public class RecordFragment extends Fragment{
             }
         });
 
-        listen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gif.start();
-                try {
-                    if(mediaPlayer != null){    // 사용하기 전에
-                        mediaPlayer.release();  // 리소스 해제
-                        mediaPlayer = null;
-                    }
-                    mediaPlayer = new MediaPlayer();
-                    mediaPlayer.setDataSource(fileName); // 음악 파일 위치 지정
-                    mediaPlayer.prepare();  // 미리 준비
-                    mediaPlayer.start();    // 재생
-                    Toast.makeText(getActivity().getApplicationContext(), "재생시작", Toast.LENGTH_SHORT).show();
-                    if(!mediaPlayer.isPlaying()){
-                        gif.stop();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
+//        listen.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                gif.start();
+//                try {
+//                    if(mediaPlayer != null){    // 사용하기 전에
+//                        mediaPlayer.release();  // 리소스 해제
+//                        mediaPlayer = null;
+//                    }
+//                    mediaPlayer = new MediaPlayer();
+//                    mediaPlayer.setDataSource(fileName); // 음악 파일 위치 지정
+//                    mediaPlayer.prepare();  // 미리 준비
+//                    mediaPlayer.start();    // 재생
+//                    Toast.makeText(getActivity().getApplicationContext(), "재생시작", Toast.LENGTH_SHORT).show();
+//                    if(!mediaPlayer.isPlaying()){
+//                        gif.stop();
+//                    }
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        });
 
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override

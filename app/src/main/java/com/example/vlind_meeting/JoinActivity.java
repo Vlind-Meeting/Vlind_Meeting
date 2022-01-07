@@ -13,8 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class JoinActivity extends AppCompatActivity {
 
-    private String user_name, user_number, user_password, user_gender;
-    private EditText join_name, join_password, join_number;
+    private String user_name, user_number, user_password, user_gender, user_nickname;
+    private EditText join_name, join_password, join_number, join_nickname;
     private Button join_button, delete_button;
     private CheckBox check_man, check_woman;
 
@@ -25,8 +25,11 @@ public class JoinActivity extends AppCompatActivity {
         join_name = (EditText) findViewById(R.id.join_name);
         join_password = (EditText) findViewById(R.id.join_password);
         join_number = (EditText) findViewById(R.id.join_number);
+        join_nickname = (EditText) findViewById(R.id.join_nickname);
         check_man = (CheckBox) findViewById(R.id.check_man);
         check_woman = (CheckBox) findViewById(R.id.check_woman);
+        check_man.bringToFront();
+        check_woman.bringToFront();
         join_button = (Button) findViewById(R.id.join_button);
         delete_button = (Button) findViewById(R.id.delete_button);
         delete_button.setOnClickListener(new View.OnClickListener() {
@@ -38,11 +41,13 @@ public class JoinActivity extends AppCompatActivity {
         join_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
                 user_name = join_name.getText().toString();
                 user_password = join_password.getText().toString();
                 user_number = join_number.getText().toString();
+                user_nickname = join_nickname.getText().toString();
 
-                if(user_name.getBytes().length <= 0 || user_number.getBytes().length <= 0 || user_password.getBytes().length <= 0){
+                if(user_name.getBytes().length <= 0 || user_number.getBytes().length <= 0 || user_password.getBytes().length <= 0 || user_nickname.getBytes().length <= 0){
                     AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
                     builder.setTitle("알림창").setMessage("값을 입력해주세요.");
                     AlertDialog alertDialog = builder.create();
@@ -75,6 +80,7 @@ public class JoinActivity extends AppCompatActivity {
                                         intent.putExtra("user_password", user_password);
                                         intent.putExtra("user_name", user_name);
                                         intent.putExtra("user_number", user_number);
+                                        intent.putExtra("user_nickname", user_nickname);
                                         startActivity(intent);
                                     }
                                 })

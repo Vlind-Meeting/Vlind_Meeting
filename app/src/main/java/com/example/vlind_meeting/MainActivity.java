@@ -18,9 +18,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 //        setActionBar();
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
-
 //        EditText login_name = (EditText) findViewById(R.id.login_name);
         EditText login_number = (EditText) findViewById(R.id.login_number);
         EditText login_password = (EditText) findViewById(R.id.mbti);

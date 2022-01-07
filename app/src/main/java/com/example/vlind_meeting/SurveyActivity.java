@@ -18,7 +18,7 @@ public class SurveyActivity extends AppCompatActivity implements FragmentListene
 
     private int q1, q2, q3, q4, q5, q6, q7, q8, q9;
     private String q10, voice;
-    private String user_voice, user_name, user_password, user_gender, user_number;
+    private String user_voice, user_name, user_password, user_gender, user_number, user_nickname;
 
     RecordFragment frameRecord;
     Q1Fragment frameQ1;
@@ -56,6 +56,7 @@ public class SurveyActivity extends AppCompatActivity implements FragmentListene
         user_password = intent.getExtras().getString("user_password");
         user_name = intent.getExtras().getString("user_name");
         user_number = intent.getExtras().getString("user_number");
+        user_nickname = intent.getExtras().getString("user_nickname");
 
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();

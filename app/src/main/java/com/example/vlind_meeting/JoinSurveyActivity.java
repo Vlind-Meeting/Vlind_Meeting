@@ -22,6 +22,7 @@ public class JoinSurveyActivity extends AppCompatActivity {
                 String user_password = intent.getExtras().getString("user_password");
                 String user_name = intent.getExtras().getString("user_name");
                 String user_number = intent.getExtras().getString("user_number");
+                String user_nickname = intent.getExtras().getString("user_nickname");
 
                 Intent intent0 = new Intent(JoinSurveyActivity.this, SurveyActivity.class);
 
@@ -29,6 +30,7 @@ public class JoinSurveyActivity extends AppCompatActivity {
                 intent0.putExtra("user_password", user_password);
                 intent0.putExtra("user_name", user_name);
                 intent0.putExtra("user_number", user_number);
+                intent0.putExtra("user_nickname", user_nickname);
 
                 startActivity(intent0);
             }

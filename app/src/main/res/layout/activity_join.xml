@@ -15,7 +15,6 @@
         android:textSize="45dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,8 +22,8 @@
 
     <EditText
         android:id="@+id/join_name"
-        android:layout_width="235dp"
-        android:layout_height="49dp"
+        android:layout_width="229dp"
+        android:layout_height="45dp"
         android:background="@drawable/edittext"
         android:elevation="3dp"
         android:ems="10"
@@ -33,7 +32,6 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.556"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -41,8 +39,8 @@
 
     <EditText
         android:id="@+id/join_number"
-        android:layout_width="235dp"
-        android:layout_height="49dp"
+        android:layout_width="229dp"
+        android:layout_height="45dp"
         android:background="@drawable/edittext"
         android:elevation="3dp"
         android:ems="10"
@@ -51,7 +49,6 @@
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.556"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -59,8 +56,8 @@
 
     <EditText
         android:id="@+id/join_nickname"
-        android:layout_width="235dp"
-        android:layout_height="49dp"
+        android:layout_width="229dp"
+        android:layout_height="45dp"
         android:background="@drawable/edittext"
         android:elevation="3dp"
         android:ems="10"
@@ -69,7 +66,6 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.556"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -77,8 +73,8 @@
 
     <EditText
         android:id="@+id/join_password"
-        android:layout_width="235dp"
-        android:layout_height="49dp"
+        android:layout_width="229dp"
+        android:layout_height="45dp"
         android:background="@drawable/edittext"
         android:elevation="3dp"
         android:ems="10"
@@ -87,57 +83,11 @@
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.556"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.64"
         tools:ignore="MissingConstraints" />
-
-    <CheckBox
-        android:id="@+id/check_man"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:background="@drawable/checkbox_style"
-        android:button="@null"
-        android:fontFamily="@font/basic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.312"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.768" />
-
-    <ImageView
-        android:layout_width="53dp"
-        android:layout_height="45dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.405"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.773"
-        app:srcCompat="@drawable/man" />
-
-    <Button
-        android:id="@+id/join_button"
-        android:layout_width="82dp"
-        android:layout_height="40dp"
-        android:background="@drawable/btn_style"
-        android:backgroundTint="@color/tiffany"
-        android:fontFamily="@font/basic"
-        android:textColor="@color/white"
-        android:text="가입"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.361"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.907" />
 
     <Button
         android:id="@+id/delete_button"
@@ -151,23 +101,56 @@
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintHorizontal_bias="0.68"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.907" />
 
-    <ImageView
-        android:layout_width="23dp"
-        android:layout_height="131dp"
+    <CheckBox
+        android:id="@+id/check_man"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/checkbox_style"
+        android:button="@null"
+        android:fontFamily="@font/basic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.729"
+        app:layout_constraintHorizontal_bias="0.292"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.826"
-        app:srcCompat="@drawable/woman" />
+        app:layout_constraintVertical_bias="0.767" />
+
+    <ImageView
+        android:layout_width="53dp"
+        android:layout_height="45dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.382"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.774"
+        app:srcCompat="@drawable/man" />
+
+    <Button
+        android:id="@+id/join_button"
+        android:layout_width="82dp"
+        android:layout_height="40dp"
+        android:background="@drawable/btn_style"
+        android:backgroundTint="@color/tiffany"
+        android:fontFamily="@font/basic"
+        android:text="가입"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.337"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.907" />
 
     <CheckBox
         android:id="@+id/check_woman"
@@ -178,11 +161,23 @@
         android:fontFamily="@font/basic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.632"
+        app:layout_constraintHorizontal_bias="0.611"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.768" />
+        app:layout_constraintVertical_bias="0.767" />
+
+    <ImageView
+        android:layout_width="23dp"
+        android:layout_height="131dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.708"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.826"
+        app:srcCompat="@drawable/woman" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

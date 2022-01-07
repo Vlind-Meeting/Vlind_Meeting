@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.media.MediaDataSource;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,11 +29,18 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
+import pl.droidsonroids.gif.GifDrawable;
+import pl.droidsonroids.gif.GifImageView;
+
 public class RecordFragment extends Fragment{
     private Button next_button;
     private Button record;
     private Button listen;
     private ViewGroup viewgroup;
+    private GifImageView gif_img;
+    private GifDrawable gif;
+    private ImageView record_start;
+    private ImageView record_stop;
 
     FragmentListener fragmentListener;
     MediaRecorder recorder;
@@ -72,6 +81,20 @@ public class RecordFragment extends Fragment{
         record = (Button) viewgroup.findViewById(R.id.record);
         listen = (Button) viewgroup.findViewById(R.id.listen);
 
+        record.bringToFront();
+        listen.bringToFront();
+        next_button.bringToFront();
+
+        try {
+            gif = new GifDrawable(getResources(), R.drawable.record_gif);
+            gif_img = (GifImageView) viewgroup.findViewById(R.id.voice_gif);
+            gif_img.setImageDrawable(gif);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        gif.stop();
+
+
         File file = new File(Environment.getExternalStorageDirectory(), "recorded.mp4");
         fileName = file.getAbsolutePath();  // 파일 위치 가져옴
         Toast.makeText(getActivity().getApplicationContext(), "파일 위치:"+fileName, Toast.LENGTH_SHORT).show();
@@ -80,7 +103,8 @@ public class RecordFragment extends Fragment{
 
             @Override
             public void onClick(View view) {
-                if(n%2==0){
+                if(n%3==0){
+                    gif.start();
                     if (recorder == null) {
                         recorder = new MediaRecorder(); // 미디어리코더 객체 생성
                     }
@@ -95,13 +119,33 @@ public class RecordFragment extends Fragment{
                         Toast.makeText(getActivity().getApplicationContext(), "녹음시작", Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {e.printStackTrace();}
                 }
-                else{
+                else if(n%3==1){
+                    gif.stop();
                     if (recorder != null) {
                         recorder.stop();
                         recorder.release();
                         recorder = null;
                     }
                     Toast.makeText(getActivity().getApplicationContext(), "녹음중지", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    gif.start();
+                    try {
+                        if(mediaPlayer != null){    // 사용하기 전에
+                            mediaPlayer.release();  // 리소스 해제
+                            mediaPlayer = null;
+                        }
+                        mediaPlayer = new MediaPlayer();
+                        mediaPlayer.setDataSource(fileName); // 음악 파일 위치 지정
+                        mediaPlayer.prepare();  // 미리 준비
+                        mediaPlayer.start();    // 재생
+                        Toast.makeText(getActivity().getApplicationContext(), "재생시작", Toast.LENGTH_SHORT).show();
+                        if(!mediaPlayer.isPlaying()){
+                            gif.stop();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
                 n++;
             }
@@ -110,6 +154,7 @@ public class RecordFragment extends Fragment{
         listen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                gif.start();
                 try {
                     if(mediaPlayer != null){    // 사용하기 전에
                         mediaPlayer.release();  // 리소스 해제
@@ -120,6 +165,9 @@ public class RecordFragment extends Fragment{
                     mediaPlayer.prepare();  // 미리 준비
                     mediaPlayer.start();    // 재생
                     Toast.makeText(getActivity().getApplicationContext(), "재생시작", Toast.LENGTH_SHORT).show();
+                    if(!mediaPlayer.isPlaying()){
+                        gif.stop();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/record_start"
+    ></item>
+    <item
+        android:drawable="@drawable/record_pause"
+        android:state_selected="true"
+        ></item>
+    <item
+        android:drawable="@drawable/record_pause"
+        android:state_pressed="true"
+        ></item>
+
+</selector>

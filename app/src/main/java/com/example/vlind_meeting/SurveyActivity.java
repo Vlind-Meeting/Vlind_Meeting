@@ -3,12 +3,14 @@ package com.example.vlind_meeting;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,8 +18,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SurveyActivity extends AppCompatActivity implements FragmentListener {
 
@@ -26,10 +34,12 @@ public class SurveyActivity extends AppCompatActivity implements FragmentListene
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
-
+    private final String TAG = "SurveyActivityLog";
     private int q1, q2, q3, q4, q5, q6, q7, q8, q9;
-    private String q10, voice;
-    private String user_voice, user_name, user_password, user_gender, user_number, user_nickname;
+    private String q10, filename;
+    private String user_name, user_password, user_gender, user_number, user_nickname;
+
+    private ResponseSurvey responseSurvey;
 
     RecordFragment frameRecord;
     Q1Fragment frameQ1;
@@ -42,8 +52,8 @@ public class SurveyActivity extends AppCompatActivity implements FragmentListene
     Q8Fragment frameQ8;
     Q9Fragment frameQ9;
     Q10Fragment frameQ10;
-    private FragmentManager fragmentManager;
-    private FragmentTransaction transaction;
+    public FragmentManager fragmentManager;
+    public FragmentTransaction transaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +74,6 @@ public class SurveyActivity extends AppCompatActivity implements FragmentListene
         frameQ10 = new Q10Fragment();
 
         Intent intent = getIntent();
-        user_voice = intent.getExtras().getString("user_voice");
         user_gender = intent.getExtras().getString("user_gender");
         user_password = intent.getExtras().getString("user_password");
         user_name = intent.getExtras().getString("user_name");
@@ -76,17 +85,24 @@ public class SurveyActivity extends AppCompatActivity implements FragmentListene
 //        transaction.replace(R.id.frame_layout, frameQ1).commit();
         transaction.replace(R.id.frame_layout, frameRecord).commit();
 
+        responseSurvey = RetrofitClientInstance.getClient().create(ResponseSurvey.class);
     }
 
+    @Override
+    public String getUserNumber() {
+        return user_number;
+    }
+
+    @Override
     public void setRecord(String s){
-        voice=s;
+        filename = s;
     }
 
+    @Override
     public void nextRecord(){
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_layout, frameQ1).commit();
     }
-
 
     @Override
     public void setQ1(int i) {
@@ -194,9 +210,38 @@ public class SurveyActivity extends AppCompatActivity implements FragmentListene
 
     @Override
     public void submit() {
-        //설문을 제출하면 본인 프로필이 있는 MainAppActivity로 이동하여 프로필을 보여줘야함
-        Intent intent = new Intent(SurveyActivity.this, MainAppActivity.class);
-        startActivity(intent);
+
+        SurveyRequest surveyRequest = new SurveyRequest(user_name, user_number, user_nickname, user_password, user_gender,
+                filename, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10);
+        responseSurvey.postSurvey(surveyRequest).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    try {
+                        String result = response.body().string();
+                        if(result.equals("succeed")){
+                            Intent intent = new Intent(SurveyActivity.this, MainAppActivity.class);
+                            startActivity(intent);
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), "error occured", Toast.LENGTH_SHORT).show();
+                        }
+                        Log.v(TAG, "result = " + result);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Log.v(TAG, "error = " + String.valueOf(response.code()));
+                    Toast.makeText(getApplicationContext(), "error = " + String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.v(TAG, "Fail");
+                Toast.makeText(getApplicationContext(), "Response Fail", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private double RMSE_algorithm(int x1, int x2, int x3, int x4, int x5, int x6, int x7, int x8, int x9, String x10){
@@ -223,6 +268,8 @@ public class SurveyActivity extends AppCompatActivity implements FragmentListene
         }
     }
 
+
+    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode==0)

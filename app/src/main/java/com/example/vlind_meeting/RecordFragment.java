@@ -98,10 +98,11 @@ public class RecordFragment extends Fragment{
         }
         gif.stop();
 
-
-        File file = new File(Environment.getExternalStorageDirectory(), "recorded.mp4");
+        //recorded.mp4 는 파일 이름을 의미한다. 파일 경로는 getExternalStorageDirectory()로부터 받아온다.
+        String name = fragmentListener.getUserNumber() + ".mp4";
+        File file = new File(Environment.getExternalStorageDirectory(), name);
         fileName = file.getAbsolutePath();  // 파일 위치 가져옴
-        Toast.makeText(getActivity().getApplicationContext(), "파일 위치:"+fileName, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity().getApplicationContext(), "파일 위치:"+ fileName, Toast.LENGTH_SHORT).show();
 
         record.setOnClickListener(new View.OnClickListener() {
 
@@ -149,10 +150,16 @@ public class RecordFragment extends Fragment{
                         mediaPlayer.setDataSource(fileName); // 음악 파일 위치 지정
                         mediaPlayer.prepare();  // 미리 준비
                         mediaPlayer.start();    // 재생
-                        Toast.makeText(getActivity().getApplicationContext(), "재생시작", Toast.LENGTH_SHORT).show();
-                        if(!mediaPlayer.isPlaying()){
-                            gif.stop();
-                        }
+//                        Toast.makeText(getActivity().getApplicationContext(), "재생시작", Toast.LENGTH_SHORT).show();
+
+                        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+                                gif.stop();
+                                record_state.setText("Stopped");
+                            }
+                        });
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

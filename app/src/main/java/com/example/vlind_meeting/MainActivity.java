@@ -22,7 +22,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private final String TAG = "MainActivityLog";
-    private final String URL = "http://192.249.18.135:80/";
 
     private String user_number, user_password;
     private EditText login_number, login_password;
@@ -40,11 +39,7 @@ public class MainActivity extends AppCompatActivity {
         join_button = (TextView) findViewById(R.id.join_button);
         login_button = (Button) findViewById(R.id.login_button);
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        responseLogin = retrofit.create(ResponseLogin.class);
+        responseLogin = RetrofitClientInstance.getClient().create(ResponseLogin.class);
 
         join_button.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -78,8 +73,11 @@ public class MainActivity extends AppCompatActivity {
                                 String exist_number = result.getNumber();
                                 String exist_password = result.getPassword();
                                 if (exist_number.equals(user_number)) {
-                                    if(exist_password.equals(user_password))
-                                        Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
+                                    if(exist_password.equals(user_password)) {
+//                                        Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(MainActivity.this, MainAppActivity.class);
+                                        startActivity(intent);
+                                    }
                                     else
                                         Toast.makeText(getApplicationContext(), "비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show();
                                 }
@@ -98,8 +96,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
 
-                    Intent intent = new Intent(MainActivity.this, MainAppActivity.class);
-                    startActivity(intent);
                 }
 
 

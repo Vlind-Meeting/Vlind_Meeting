@@ -4,19 +4,33 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class JoinActivity extends AppCompatActivity {
+import java.io.IOException;
 
-    private String user_name, user_number, user_password, user_gender, user_nickname;
-    private EditText join_name, join_password, join_number, join_nickname;
-    private Button join_button, delete_button;
+public class JoinActivity extends AppCompatActivity {
+    private final String TAG = "JoinActivityLog";
+
+    private String user_name, user_nickname, user_number, user_password, user_gender;
+    private EditText join_name, join_nickname, join_number, join_password;
     private CheckBox check_man, check_woman;
+    private Button join_button, delete_button;
+    private Retrofit retrofit;
+    private ResponseLogin responseLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +42,11 @@ public class JoinActivity extends AppCompatActivity {
         join_nickname = (EditText) findViewById(R.id.join_nickname);
         check_man = (CheckBox) findViewById(R.id.check_man);
         check_woman = (CheckBox) findViewById(R.id.check_woman);
-        check_man.bringToFront();
-        check_woman.bringToFront();
         join_button = (Button) findViewById(R.id.join_button);
         delete_button = (Button) findViewById(R.id.delete_button);
+
+        responseLogin = RetrofitClientInstance.getClient().create(ResponseLogin.class);
+
         delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,7 +56,6 @@ public class JoinActivity extends AppCompatActivity {
         join_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-
                 user_name = join_name.getText().toString();
                 user_password = join_password.getText().toString();
                 user_number = join_number.getText().toString();
@@ -69,22 +83,67 @@ public class JoinActivity extends AppCompatActivity {
 
                        //회원가입 시 데이터베이스에 새롭게 정보 인서트 하는 거 아직 구현 안 됨
 
-                        new AlertDialog.Builder(JoinActivity.this)
-                                .setTitle("동의")
-                                .setMessage("hihihi")
-                                .setNeutralButton("Confirm", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        Intent intent = new Intent(JoinActivity.this, JoinSurveyActivity.class);
-                                        intent.putExtra("user_gender", user_gender);
-                                        intent.putExtra("user_password", user_password);
-                                        intent.putExtra("user_name", user_name);
-                                        intent.putExtra("user_number", user_number);
-                                        intent.putExtra("user_nickname", user_nickname);
-                                        startActivity(intent);
+                        JoinRequest joinRequest = new JoinRequest(user_name, user_number, user_nickname, user_password, user_gender);
+                        responseLogin.postJoin(joinRequest).enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if (response.isSuccessful()) {
+                                    try {
+                                        String result = response.body().string();
+                                        if(result.equals("succeed")){
+                                            new AlertDialog.Builder(JoinActivity.this)
+                                                    .setTitle("동의")
+                                                    .setMessage("hihihi")
+                                                    .setNeutralButton("Confirm", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                                            Intent intent = new Intent(JoinActivity.this, JoinSurveyActivity.class);
+                                                            intent.putExtra("user_name", user_name);
+                                                            intent.putExtra("user_number", user_number);
+                                                            intent.putExtra("user_nickname", user_nickname);
+                                                            intent.putExtra("user_password", user_password);
+                                                            intent.putExtra("user_gender", user_gender);
+                                                            startActivity(intent);
+                                                        }
+                                                    })
+                                                    .show();
+                                        }
+                                        else{
+                                            Toast.makeText(getApplicationContext(), "중복된 전화번호입니다.", Toast.LENGTH_SHORT).show();
+                                        }
+                                        Log.v(TAG, "result = " + result);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
                                     }
-                                })
-                                .show();
+                                } else {
+                                    Log.v(TAG, "error = " + String.valueOf(response.code()));
+                                    Toast.makeText(getApplicationContext(), "error = " + String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                Log.v(TAG, "Fail");
+                                Toast.makeText(getApplicationContext(), "Response Fail", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+//                        new AlertDialog.Builder(JoinActivity.this)
+//                                .setTitle("동의")
+//                                .setMessage("hihihi")
+//                                .setNeutralButton("Confirm", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialogInterface, int i) {
+//                                        Intent intent = new Intent(JoinActivity.this, JoinSurveyActivity.class);
+//                                        intent.putExtra("user_gender", user_gender);
+//                                        intent.putExtra("user_password", user_password);
+//                                        intent.putExtra("user_name", user_name);
+//                                        intent.putExtra("user_number", user_number);
+//                                        intent.putExtra("user_nickname", user_nickname);
+//                                        startActivity(intent);
+//                                    }
+//                                })
+//                                .show();
 
                     }
 

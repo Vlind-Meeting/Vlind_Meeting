@@ -43,7 +43,16 @@
             android:exported="true"
             android:theme="@style/Theme.VlindMeeting.">
         </activity>
-
+        <activity
+            android:name=".MsgActivity"
+            android:exported="true"
+            android:theme="@style/Theme.VlindMeeting.">
+        </activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="true"
+            android:theme="@style/Theme.VlindMeeting.">
+        </activity>
     </application>
 
 </manifest>

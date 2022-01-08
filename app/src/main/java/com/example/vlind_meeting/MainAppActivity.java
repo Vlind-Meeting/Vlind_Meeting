@@ -28,7 +28,6 @@ public class MainAppActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //본인의 프로필을 보여줘야 함
         //그리고 여기서 이성한테 하트를 보내는 창, 메시지 함 등으로 넘어가는 아이콘들을 구현해야함. 그리고 추가로 Activity들을 생성해야 한다.
 
         msg_btn = (Button) findViewById(R.id.msg_btn);
@@ -84,7 +83,6 @@ public class MainAppActivity extends AppCompatActivity {
 
         select_btn = (CheckBox) findViewById(R.id.select_btn);
         if(select_btn.isChecked()){
-            //getCurrentItem에 따라서 데이터베이스에서 받아오기
             Toast.makeText(getApplicationContext(), String.valueOf(mPager.getCurrentItem()), Toast.LENGTH_SHORT).show();
         }
     }

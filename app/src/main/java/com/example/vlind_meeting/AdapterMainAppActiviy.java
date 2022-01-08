@@ -15,12 +15,9 @@ public class AdapterMainAppActiviy extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         int index = getRealPosition(position);
-//        if(index==0) return new Fragment_1();
-//        else if(index==1) return new Fragment_2();
-//        else if(index==2) return new Fragment_3();
-//        else return new Fragment_4();
         if(index==0) return new Match1Fragment();
-        else return new Match2Fragment();
+        else if(index==1) return new Match2Fragment();
+        else return new Match3Fragment();
     }
     @Override
     public int getItemCount() {

@@ -25,7 +25,7 @@ public class MainAppActivity extends AppCompatActivity {
 
     private ViewPager2 mPager;
     private FragmentStateAdapter pagerAdapter;
-    private int num_page = 2;
+    private int num_page = 3;
     private CircleIndicator3 mIndicator;
     private CheckBox select_btn;
 

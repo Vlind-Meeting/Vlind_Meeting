@@ -70,9 +70,9 @@ public class JoinActivity extends AppCompatActivity {
                        //회원가입 시 데이터베이스에 새롭게 정보 인서트 하는 거 아직 구현 안 됨
 
                         new AlertDialog.Builder(JoinActivity.this)
-                                .setTitle("동의")
-                                .setMessage("hihihi")
-                                .setNeutralButton("Confirm", new DialogInterface.OnClickListener() {
+                                .setTitle("사용 약관 동의")
+                                .setMessage("녹음된 파일이 다른 사용자에게 공유되는 것에 동의합니까?")
+                                .setPositiveButton("동의", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         Intent intent = new Intent(JoinActivity.this, JoinSurveyActivity.class);

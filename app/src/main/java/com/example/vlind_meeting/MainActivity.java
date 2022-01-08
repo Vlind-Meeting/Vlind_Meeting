@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                                 if (exist_number.equals(user_number)) {
                                     if(exist_password.equals(user_password)) {
 //                                        Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(MainActivity.this, MainAppActivity.class);
+                                        Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                                         startActivity(intent);
                                     }
                                     else

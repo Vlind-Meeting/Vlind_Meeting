@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-public class AdapterMainAppActiviy extends FragmentStateAdapter {
+public class MainAppActiviyAdapter extends FragmentStateAdapter {
     public int mCount;
-    public AdapterMainAppActiviy(FragmentActivity fa, int count) {
+    public MainAppActiviyAdapter(FragmentActivity fa, int count) {
         super(fa);
         mCount = count;
     }

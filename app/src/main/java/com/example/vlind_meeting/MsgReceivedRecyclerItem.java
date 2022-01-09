@@ -1,37 +1,37 @@
 package com.example.vlind_meeting;
 
 public class MsgReceivedRecyclerItem {
-    private int mImgName;
-    private String mMainText;
-    private String mSubText;
+    String name;
+    String message;
+    int resourceId;
 
-    public MsgReceivedRecyclerItem(int mImgName, String mMainText, String mSubText) {
-        this.mImgName = mImgName;
-        this.mMainText= mMainText;
-        this.mSubText = mSubText;
+    public MsgReceivedRecyclerItem(int resourceId, String name, String message) {
+        this.name = name;
+        this.message= message;
+        this.resourceId = resourceId;
     }
 
-    public int getImgName() {
-        return mImgName;
+    public int getResourceId() {
+        return resourceId;
     }
 
-    public void setImgName(int imgName) {
-        this.mImgName = imgName;
+    public String getMessage() {
+        return message;
     }
 
-    public String getMainText() {
-        return mMainText;
+    public String getName() {
+        return name;
     }
 
-    public void setMainText(String mainText) {
-        this.mMainText = mainText;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public String getSubText() {
-        return mSubText;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setSubText(String subText) {
-        this.mSubText = subText;
+    public void setResourceId(int resourceId) {
+        this.resourceId = resourceId;
     }
 }

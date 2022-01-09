@@ -24,6 +24,28 @@ public class MsgReceivedTabFragment extends Fragment {
                              Bundle savedInstanceState) {
         rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_msg_received, container, false);
+
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+
+        /* initiate adapter */
+        mRecyclerViewAdapter = new MsgReceivedRecyclerAdapter();
+
+        /* initiate recyclerview */
+        mRecyclerView.setAdapter(mRecyclerViewAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false));	// 가로
+
+        /* adapt data */
+        mList = new ArrayList<>();
+        for(int i=1;i<=10;i++){
+            if(i%2==0)
+                mList.add(new MsgReceivedRecyclerItem(R.drawable.profile,i+"번째 사람",i+"번째 상태메시지"));
+            else
+                mList.add(new MsgReceivedRecyclerItem(R.drawable.profile,i+"번째 사람",i+"번째 상태메시지"));
+        }
+        mRecyclerViewAdapter.setFriendList(mList);
+
+
 //
 //        firstInit();
 //

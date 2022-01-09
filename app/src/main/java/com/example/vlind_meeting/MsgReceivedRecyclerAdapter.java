@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class MsgReceivedRecyclerAdapter extends RecyclerView.Adapter<MsgReceivedRecyclerAdapter.ViewHolder> {
 
-    private ArrayList<MsgReceivedRecyclerItem> mFriendList;
+    private ArrayList<MsgReceivedRecyclerItem> mReceivedList;
 
     @NonNull
     @Override
@@ -25,17 +25,17 @@ public class MsgReceivedRecyclerAdapter extends RecyclerView.Adapter<MsgReceived
 
     @Override
     public void onBindViewHolder(@NonNull MsgReceivedRecyclerAdapter.ViewHolder holder, int position) {
-        holder.onBind(mFriendList.get(position));
+        holder.onBind(mReceivedList.get(position));
     }
 
     public void setFriendList(ArrayList<MsgReceivedRecyclerItem> list){
-        this.mFriendList = list;
+        this.mReceivedList = list;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return mFriendList.size();
+        return mReceivedList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

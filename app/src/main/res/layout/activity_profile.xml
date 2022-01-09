@@ -237,7 +237,7 @@
         android:id="@+id/sound_btn"
         android:layout_width="70dp"
         android:layout_height="88dp"
-        android:background="@drawable/mic_profile"
+        android:background="@drawable/mic_profile_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

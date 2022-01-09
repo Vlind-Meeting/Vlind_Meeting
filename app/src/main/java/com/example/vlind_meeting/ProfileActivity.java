@@ -68,10 +68,10 @@ public class ProfileActivity extends AppCompatActivity {
         sound_state = (TextView) findViewById(R.id.sound_state);
         sound_info = (TextView) findViewById(R.id.sound_info);
 
+        //여기서 filename 수정
         File file = new File(Environment.getExternalStorageDirectory(), "01040530728.mp4");
         fileName = file.getAbsolutePath();  // 파일 위치 가져옴
         Toast.makeText(this.getApplicationContext(), "파일 위치:"+fileName, Toast.LENGTH_SHORT).show();
-
 
         sound_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +130,22 @@ public class ProfileActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "녹음중지", Toast.LENGTH_SHORT).show();
                 }
                 n++;
+            }
+        });
+
+        // 닉네임 수정
+        edit_nickname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        // 비밀번호 수정
+        edit_pwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 

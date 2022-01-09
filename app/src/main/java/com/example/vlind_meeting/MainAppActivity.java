@@ -13,7 +13,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import me.relex.circleindicator.CircleIndicator3;
 
-public class MainAppActivity extends AppCompatActivity {
+public class MainAppActivity extends AppCompatActivity implements MatchingListener{
 
     private ViewPager2 mPager;
     private FragmentStateAdapter pagerAdapter;
@@ -21,6 +21,7 @@ public class MainAppActivity extends AppCompatActivity {
     private CircleIndicator3 mIndicator;
     private CheckBox select_btn;
     private Button msg_btn, profile_btn;
+    private String nickname1, nickname2, nickname3, filename1, filename2, filename3;
 
     private String user_voice, user_name, user_password, user_gender, user_number, user_nickname;
 
@@ -28,6 +29,15 @@ public class MainAppActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intent0 = getIntent();
+        nickname1 = intent0.getExtras().getString("nickname1");
+        filename1 = intent0.getExtras().getString("filename1");
+        nickname2 = intent0.getExtras().getString("nickname2");
+        filename2 = intent0.getExtras().getString("filename2");
+        nickname3 = intent0.getExtras().getString("nickname3");
+        filename3 = intent0.getExtras().getString("filename3");
+
         //그리고 여기서 이성한테 하트를 보내는 창, 메시지 함 등으로 넘어가는 아이콘들을 구현해야함. 그리고 추가로 Activity들을 생성해야 한다.
 
         msg_btn = (Button) findViewById(R.id.msg_btn);
@@ -55,7 +65,7 @@ public class MainAppActivity extends AppCompatActivity {
         //ViewPager2
         mPager = findViewById(R.id.viewpager);
         //Adapter
-        pagerAdapter = new MainAppActiviyAdapter(this, num_page);
+        pagerAdapter = new MainAppActivityAdapter(MainAppActivity.this, num_page, this);
         mPager.setAdapter(pagerAdapter);
         //Indicator
         mIndicator = findViewById(R.id.indicator);
@@ -85,7 +95,25 @@ public class MainAppActivity extends AppCompatActivity {
         if(select_btn.isChecked()){
             Toast.makeText(getApplicationContext(), String.valueOf(mPager.getCurrentItem()), Toast.LENGTH_SHORT).show();
         }
+
     }
 
 
+    @Override
+    public matchClass getMatch1() {
+        matchClass m1 = new matchClass(nickname1, filename1);
+        return m1;
+    }
+
+    @Override
+    public matchClass getMatch2() {
+        matchClass m2 = new matchClass(nickname2, filename2);
+        return m2;
+    }
+
+    @Override
+    public matchClass getMatch3() {
+        matchClass m3 = new matchClass(nickname3, filename3);
+        return m3;
+    }
 }

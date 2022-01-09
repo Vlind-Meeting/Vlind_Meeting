@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.921">
 
         <android.widget.Button
-            android:id="@+id/button2"
+            android:id="@+id/edit_pwd"
             android:layout_width="41dp"
             android:layout_height="21dp"
             android:background="@drawable/btn_style"
@@ -214,6 +214,7 @@
             app:layout_constraintVertical_bias="0.592" />
 
         <android.widget.Button
+            android:id="@+id/edit_nickname"
             android:layout_width="41dp"
             android:layout_height="21dp"
             android:background="@drawable/btn_style"

@@ -1,16 +1,26 @@
 package com.example.vlind_meeting;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.helper.widget.Carousel;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MsgReceivedTabFragment extends Fragment {
@@ -18,6 +28,9 @@ public class MsgReceivedTabFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private ArrayList<MsgReceivedRecyclerItem> mList;
     private MsgReceivedRecyclerAdapter mRecyclerViewAdapter;
+
+    MediaPlayer mediaPlayer;
+    String fileName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,36 +46,95 @@ public class MsgReceivedTabFragment extends Fragment {
         /* initiate recyclerview */
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false));	// 가로
 
         /* adapt data */
         mList = new ArrayList<>();
         for(int i=1;i<=10;i++){
             if(i%2==0)
-                mList.add(new MsgReceivedRecyclerItem(R.drawable.profile,i+"번째 사람",i+"번째 상태메시지"));
+                mList.add(new MsgReceivedRecyclerItem(R.color.black,i+"번째 사람", "Press to Play", "", 0));
             else
-                mList.add(new MsgReceivedRecyclerItem(R.drawable.profile,i+"번째 사람",i+"번째 상태메시지"));
+                mList.add(new MsgReceivedRecyclerItem(R.color.tiffany,i+"번째 사람", "Press to Play", "", 0));
         }
-        mRecyclerViewAdapter.setFriendList(mList);
+        mRecyclerViewAdapter.setReceivedList(mList);
 
+        mRecyclerViewAdapter.setOnItemClickListener(new MsgReceivedRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onSoundClick(View v, int position) {
 
-//
-//        firstInit();
-//
-//        mList = new ArrayList<>();
-//        for(int i=1;i<=10;i++){
-//            if(i%2==0)
-//                mList.add(new MsgReceivedRecyclerItem(R.drawable.profile,i+"번째 사람",i+"번째 상태메시지"));
-//            else
-//                mList.add(new MsgReceivedRecyclerItem(R.drawable.profile,i+"번째 사람",i+"번째 상태메시지"));
-//        }
-////        for(int i=0;i<5;i++){
-////            addItem("iconName", "Taek" + i, "taek2.tistory.com");
-////        }
-//
-//        mRecyclerViewAdapter = new MsgReceivedRecyclerAdapter(mList);
-//        mRecyclerView.setAdapter(mRecyclerViewAdapter);
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+                File file = new File(Environment.getExternalStorageDirectory(), "1.mp4");
+                fileName = file.getAbsolutePath();  // 파일 위치 가져옴
+                Toast.makeText(getActivity().getApplicationContext(), "파일 위치:"+fileName, Toast.LENGTH_SHORT).show();
+
+                mList.get(position).setSoundState("Playing");
+
+                try {
+                    if(mediaPlayer != null){    // 사용하기 전에
+                        mediaPlayer.release();  // 리소스 해제
+                        mediaPlayer = null;
+                    }
+                    mediaPlayer = new MediaPlayer();
+                    mediaPlayer.setDataSource(fileName); // 음악 파일 위치 지정
+                    mediaPlayer.prepare();  // 미리 준비
+                    mediaPlayer.start();    // 재생
+
+                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mList.get(position).setSoundState("Stopped");
+                            mList.get(position).setSoundInfo("press to replay");
+                            mRecyclerViewAdapter.notifyItemChanged(position);
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                mRecyclerViewAdapter.notifyItemChanged(position);
+            }
+
+            @Override
+            public void onAcceptClick(View v, int position) {
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("매칭 신청 수락")
+                        .setMessage("매칭 신청을 수락하시겠습니까?")
+                        .setNegativeButton("수락", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                mList.remove(position);
+                                mRecyclerViewAdapter.notifyItemRemoved(position);
+                                Intent intent = new Intent(requireActivity(), FinalMatchActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setPositiveButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        })
+                        .show();
+            }
+
+            @Override
+            public void onDenyClick(View v, int position) {
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("매칭 신청 거절")
+                        .setMessage("매칭 신청을 거절하시겠습니까?")
+                        .setNegativeButton("거절", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                mList.remove(position);
+                                mRecyclerViewAdapter.notifyItemRemoved(position);
+                            }
+                        })
+                        .setPositiveButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        })
+                        .show();
+            }
+        });
 
         return rootView;
     }
@@ -72,19 +144,4 @@ public class MsgReceivedTabFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-
-    public void firstInit(){
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
-        mList = new ArrayList<>();
-    }
-
-//    public void addItem(String imgName, String mainText, String subText){
-//        MsgReceivedRecyclerItem item = new MsgReceivedRecyclerItem();
-//
-//        item.setImgName(imgName);
-//        item.setMainText(mainText);
-//        item.setSubText(subText);
-//
-//        mList.add(item);
-//    }
 }

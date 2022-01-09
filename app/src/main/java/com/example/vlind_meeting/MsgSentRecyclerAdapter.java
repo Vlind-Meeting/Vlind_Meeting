@@ -28,7 +28,7 @@ public class MsgSentRecyclerAdapter extends RecyclerView.Adapter<MsgSentRecycler
         holder.onBind(mSentList.get(position));
     }
 
-    public void setFriendList(ArrayList<MsgSentRecyclerItem> list){
+    public void setSentList(ArrayList<MsgSentRecyclerItem> list){
         this.mSentList = list;
         notifyDataSetChanged();
     }
@@ -40,21 +40,18 @@ public class MsgSentRecyclerAdapter extends RecyclerView.Adapter<MsgSentRecycler
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView profile;
-        TextView name;
-        TextView message;
+        TextView nickname;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             profile = (ImageView) itemView.findViewById(R.id.profile);
-            name = (TextView) itemView.findViewById(R.id.nickname);
-            message = (TextView) itemView.findViewById(R.id.message);
+            nickname = (TextView) itemView.findViewById(R.id.nickname);
         }
 
         void onBind(MsgSentRecyclerItem item){
             profile.setImageResource(item.getResourceId());
-            name.setText(item.getName());
-            message.setText(item.getMessage());
+            nickname.setText(item.getNickname());
         }
     }
 }

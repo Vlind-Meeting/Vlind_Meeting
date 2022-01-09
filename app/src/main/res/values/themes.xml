@@ -14,16 +14,25 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="TabText"
-        parent="TextAppearance.Design.Tab">
-        <item name="android:textColor">
-            @color/black
-        </item>
-        <item name="android:fontFamily">
-            @font/basic
-        </item>
-        <item name="android:textStyle">
-            bold
-        </item>
-    </style>
+<!--    <style name="TabText"-->
+<!--        parent="TextAppearance.Design.Tab">-->
+<!--        <item name="android:textColor">-->
+<!--            @color/black-->
+<!--        </item>-->
+<!--        <item name="android:fontFamily">-->
+<!--            @font/basic-->
+<!--        </item>-->
+<!--        <item name="android:textStyle">-->
+<!--            bold-->
+<!--        </item>-->
+<!--    </style>-->
+
+<!--    <style name="TabTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+<!--&lt;!&ndash;        <item name="colorPrimary">#f5a623</item>                                &lt;!&ndash; 배경 &ndash;&gt;&ndash;&gt;-->
+<!--        <item name="android:textColorPrimary">#000000</item>       &lt;!&ndash; 탭바 선택된 텍스트 &ndash;&gt;-->
+<!--        <item name="android:textColorSecondary">#7C7C7C</item>     &lt;!&ndash; 탭바 텍스트 &ndash;&gt;-->
+<!--        <item name="colorAccent">@color/tiffany</item>                    &lt;!&ndash; 하단 움직이는 바 색&ndash;&gt;-->
+
+<!--    </style>-->
+
 </resources>

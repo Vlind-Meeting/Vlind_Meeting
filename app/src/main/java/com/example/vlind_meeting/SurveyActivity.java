@@ -213,23 +213,27 @@ public class SurveyActivity extends AppCompatActivity implements FragmentListene
 
         SurveyRequest surveyRequest = new SurveyRequest(user_name, user_number, user_nickname, user_password, user_gender,
                 filename, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10);
-        responseSurvey.postSurvey(surveyRequest).enqueue(new Callback<ResponseBody>() {
+        responseSurvey.postSurvey(surveyRequest).enqueue(new Callback<SurveyResponse>(){
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<SurveyResponse> call, Response<SurveyResponse> response) {
                 if (response.isSuccessful()) {
-                    try {
-                        String result = response.body().string();
-                        if(result.equals("succeed")){
-                            Intent intent = new Intent(SurveyActivity.this, MainAppActivity.class);
-                            startActivity(intent);
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(), "error occured", Toast.LENGTH_SHORT).show();
-                        }
-                        Log.v(TAG, "result = " + result);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    SurveyResponse result = response.body();
+                    String nickname1 = result.getNickname1();
+                    String nickname2 = result.getNickname2();
+                    String nickname3 = result.getNickname3();
+                    String filename1 = result.getFilename1();
+                    String filename2 = result.getFilename2();
+                    String filename3 = result.getFilename3();
+
+                    Intent intent = new Intent(SurveyActivity.this, MainAppActivity.class);
+                    intent.putExtra("nickname1", nickname1);
+                    intent.putExtra("nickname2", nickname2);
+                    intent.putExtra("nickname3", nickname3);
+                    intent.putExtra("filename1", filename1);
+                    intent.putExtra("filename2", filename2);
+                    intent.putExtra("filename3", filename3);
+                    startActivity(intent);
+                    Log.v(TAG, "result = " + result);
                 } else {
                     Log.v(TAG, "error = " + String.valueOf(response.code()));
                     Toast.makeText(getApplicationContext(), "error = " + String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
@@ -237,18 +241,11 @@ public class SurveyActivity extends AppCompatActivity implements FragmentListene
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<SurveyResponse> call, Throwable t) {
                 Log.v(TAG, "Fail");
                 Toast.makeText(getApplicationContext(), "Response Fail", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private double RMSE_algorithm(int x1, int x2, int x3, int x4, int x5, int x6, int x7, int x8, int x9, String x10){
-        double result = Math.sqrt((Math.pow(x1-q1,2)*0.99 + Math.pow(x2-q2,2)*0.98 + Math.pow(x3-q3, 2)*0.97
-                + Math.pow(x4-q4,2)*1.01 + Math.pow(x5-q5,2)*1.02 + Math.pow(x6-q6, 2)*1.03
-                + Math.pow(x7-q7,2)*1.04 + Math.pow(x8-q8,2)*0.96 + Math.pow(x9-q9, 2))*0.95/9);
-        return result;
     }
 
     public void checkPermission(){

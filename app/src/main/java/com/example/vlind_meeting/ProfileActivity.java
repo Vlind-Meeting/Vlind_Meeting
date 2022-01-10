@@ -55,6 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
         match_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(ProfileActivity.this, MainAppActivity.class);
                 startActivity(intent);
             }

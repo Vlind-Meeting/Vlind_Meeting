@@ -1,13 +1,11 @@
 package com.example.vlind_meeting;
 
 public class MsgSentRecyclerItem {
-    String name;
-    String message;
+    String nickname;
     int resourceId;
 
-    public MsgSentRecyclerItem(int resourceId, String name, String message) {
-        this.name = name;
-        this.message= message;
+    public MsgSentRecyclerItem(int resourceId, String nickname) {
+        this.nickname = nickname;
         this.resourceId = resourceId;
     }
 
@@ -15,20 +13,12 @@ public class MsgSentRecyclerItem {
         return resourceId;
     }
 
-    public String getMessage() {
-        return message;
+    public String getNickname() {
+        return nickname;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public void setResourceId(int resourceId) {

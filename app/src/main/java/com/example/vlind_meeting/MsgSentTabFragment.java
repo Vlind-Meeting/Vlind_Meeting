@@ -39,11 +39,11 @@ public class MsgSentTabFragment extends Fragment {
         mList = new ArrayList<>();
         for(int i=1;i<=10;i++){
             if(i%2==0)
-                mList.add(new MsgSentRecyclerItem(R.drawable.heart_filled,"s","수락 대기 중"));
+                mList.add(new MsgSentRecyclerItem(R.color.purple_200,"sumin"));
             else
-                mList.add(new MsgSentRecyclerItem(R.drawable.heart_unfilled,"i","수락 대기 중"));
+                mList.add(new MsgSentRecyclerItem(android.R.color.holo_red_dark,"핸스"));
         }
-        mRecyclerViewAdapter.setFriendList(mList);
+        mRecyclerViewAdapter.setSentList(mList);
 
         return rootView;
     }

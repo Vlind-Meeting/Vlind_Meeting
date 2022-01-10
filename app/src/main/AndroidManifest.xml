@@ -53,6 +53,11 @@
             android:exported="true"
             android:theme="@style/Theme.VlindMeeting.">
         </activity>
+        <activity
+            android:name=".FinalMatchActivity"
+            android:exported="true"
+            android:theme="@style/Theme.VlindMeeting.">
+        </activity>
     </application>
 
 </manifest>

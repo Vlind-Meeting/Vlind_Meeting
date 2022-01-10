@@ -80,6 +80,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ProfileActivity.this, MsgActivity.class);
+                intent.putExtra("user_number", user_number);
                 startActivity(intent);
             }
         });

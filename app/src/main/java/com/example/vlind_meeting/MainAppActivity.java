@@ -1,42 +1,76 @@
 package com.example.vlind_meeting;
 
+import static java.lang.Integer.valueOf;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import java.io.IOException;
+
 import me.relex.circleindicator.CircleIndicator3;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainAppActivity extends AppCompatActivity implements MatchingListener{
-
+    private final String TAG = "MainAppActivityLog";
     private ViewPager2 mPager;
     private FragmentStateAdapter pagerAdapter;
     private int num_page = 3;
     private CircleIndicator3 mIndicator;
     private CheckBox select_btn;
     private Button msg_btn, profile_btn;
-    private String nickname1, nickname2, nickname3, filename1, filename2, filename3;
+    private TextView heart_remain;
+    private String select_page;
+    public String nickname1, nickname2, nickname3, filename1, filename2, filename3, number1, number2, number3, receive_number;
+    public int heart_num;
 
+    HeartRequest heartRequest;
+    ResponseSurvey responseSurvey;
     private String user_voice, user_name, user_password, user_gender, user_number, user_nickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        select_btn = (CheckBox) findViewById(R.id.select_btn);
+        heart_remain = (TextView) findViewById(R.id.heart_remain);
 
         Intent intent0 = getIntent();
         nickname1 = intent0.getExtras().getString("nickname1");
         filename1 = intent0.getExtras().getString("filename1");
+        number1= intent0.getExtras().getString("number1");
         nickname2 = intent0.getExtras().getString("nickname2");
         filename2 = intent0.getExtras().getString("filename2");
+        number2= intent0.getExtras().getString("number2");
         nickname3 = intent0.getExtras().getString("nickname3");
         filename3 = intent0.getExtras().getString("filename3");
+        number3 = intent0.getExtras().getString("number3");
+        user_number = intent0.getExtras().getString("user_number");
+        heart_num = intent0.getExtras().getInt("heart_num");
+//        System.out.println(user_number);
+
+        System.out.println(heart_num);
+        System.out.println(number1);
+        if(heart_num == 0){
+            heart_remain.setText("0");
+            select_btn.setEnabled(false);
+        }
+
+        responseSurvey = RetrofitClientInstance.getClient().create(ResponseSurvey.class);
 
         //그리고 여기서 이성한테 하트를 보내는 창, 메시지 함 등으로 넘어가는 아이콘들을 구현해야함. 그리고 추가로 Activity들을 생성해야 한다.
 
@@ -47,6 +81,7 @@ public class MainAppActivity extends AppCompatActivity implements MatchingListen
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainAppActivity.this, MsgActivity.class);
+                intent.putExtra("user_number", user_number);
                 startActivity(intent);
             }
         });
@@ -55,12 +90,13 @@ public class MainAppActivity extends AppCompatActivity implements MatchingListen
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainAppActivity.this, ProfileActivity.class);
+                intent.putExtra("user_number", user_number);
                 startActivity(intent);
             }
         });
 
 
-        //여기서 데이터 베이스 연결 -> 1,2,3등 이성 매치(닉네임, 녹음파일)
+
 
         //ViewPager2
         mPager = findViewById(R.id.viewpager);
@@ -91,10 +127,86 @@ public class MainAppActivity extends AppCompatActivity implements MatchingListen
             }
         });
 
-        select_btn = (CheckBox) findViewById(R.id.select_btn);
-        if(select_btn.isChecked()){
-            Toast.makeText(getApplicationContext(), String.valueOf(mPager.getCurrentItem()), Toast.LENGTH_SHORT).show();
-        }
+        select_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int tmp = valueOf(mPager.getCurrentItem()).intValue();
+                if(tmp == 0)
+                    receive_number = number1;
+                else if(tmp == 1)
+                    receive_number = number2;
+                else
+                    receive_number = number3;
+                System.out.println(tmp);
+                System.out.println(user_number);
+                heartRequest = new HeartRequest(user_number, receive_number, 0);
+                System.out.println(heartRequest);
+                new AlertDialog.Builder(MainAppActivity.this)
+                        .setTitle("매칭 신청은 1일 1회로 제한됩니다.")
+                        .setMessage("그래도 매칭을 신청하시겠습니까?")
+                        .setNegativeButton("동의", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                responseSurvey.insertHeart(heartRequest).enqueue(new Callback<SurveyResponse>() {
+                                    @Override
+                                    public void onResponse(Call<SurveyResponse> call, Response<SurveyResponse> response) {
+                                        if (response.isSuccessful()) {
+                                            SurveyResponse result = response.body();
+                                            nickname1 = result.getNickname1();
+                                            filename1 = result.getFilename1();
+                                            number1 = result.getNumber1();
+                                            nickname2 = result.getNickname2();
+                                            filename2 = result.getFilename2();
+                                            number2 = result.getNumber2();
+                                            nickname3 = result.getNickname3();
+                                            filename3 = result.getFilename3();
+                                            number3 = result.getNumber3();
+                                            int heart_num = result.getHeartNum();
+                                            Intent intent = new Intent(MainAppActivity.this, MainAppActivity.class);
+                                            intent.putExtra("nickname1", nickname1);
+                                            intent.putExtra("filename1", filename1);
+                                            intent.putExtra("number1", number1);
+                                            intent.putExtra("nickname2", nickname2);
+                                            intent.putExtra("filename2", filename2);
+                                            intent.putExtra("number2", number2);
+                                            intent.putExtra("nickname3", nickname3);
+                                            intent.putExtra("filename3", filename3);
+                                            intent.putExtra("number3", number3);
+                                            intent.putExtra("user_number", user_number);
+                                            intent.putExtra("heart_num", heart_num);
+                                            startActivity(intent);
+                                        } else {
+                                            Log.v(TAG, "error = " + String.valueOf(response.code()));
+                                            Toast.makeText(getApplicationContext(), "error = " + String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<SurveyResponse> call, Throwable t) {
+                                        Log.v(TAG, "Fail");
+                                        Toast.makeText(getApplicationContext(), "Response Fail", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+
+                            }
+                        })
+                        .setPositiveButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                                select_btn.setChecked(false);
+                            }
+                        })
+                        .setCancelable(false)
+                        .show();
+            }
+        });
+//        if(select_btn.isChecked()){
+//            select_page = String.valueOf(mPager.getCurrentItem());
+//            Toast.makeText(getApplicationContext(), String.valueOf(mPager.getCurrentItem()), Toast.LENGTH_SHORT).show();
+//
+//        }
 
     }
 

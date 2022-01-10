@@ -72,10 +72,29 @@ public class MainActivity extends AppCompatActivity {
                                 LoginResponse result = response.body();
                                 String exist_number = result.getNumber();
                                 String exist_password = result.getPassword();
+                                String exist_nickname = result.getNickname();
+                                String exist_name = result.getName();
+                                String exist_filename = result.getFilename();
+//                                System.out.println('!');
+//                                System.out.println(exist_name);
+//                                System.out.println(exist_filename);
+//                                System.out.println(exist_nickname);
+//                                System.out.println(exist_number);
+//                                System.out.println(exist_password);
+//                                System.out.println('!');
+
+
                                 if (exist_number.equals(user_number)) {
                                     if(exist_password.equals(user_password)) {
+                                        ProfileClass profileClass = ProfileClass.getInstance();
+                                        profileClass.setUser_number(exist_number);
+                                        profileClass.setUser_password(exist_password);
+                                        profileClass.setUser_nickname(exist_nickname);
+                                        profileClass.setUser_name(exist_name);
+                                        profileClass.setUser_filename(exist_filename);
 //                                        Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                                        intent.putExtra("user_number", user_number);
                                         startActivity(intent);
                                     }
                                     else

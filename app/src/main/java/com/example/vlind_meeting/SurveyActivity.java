@@ -38,6 +38,7 @@ public class SurveyActivity extends AppCompatActivity implements FragmentListene
     private int q1, q2, q3, q4, q5, q6, q7, q8, q9;
     private String q10, filename;
     private String user_name, user_password, user_gender, user_number, user_nickname;
+    private String filename1, filename2, filename3, nickname1, nickname2, nickname3, number1, number2, number3;
 
     private ResponseSurvey responseSurvey;
 
@@ -218,20 +219,36 @@ public class SurveyActivity extends AppCompatActivity implements FragmentListene
             public void onResponse(Call<SurveyResponse> call, Response<SurveyResponse> response) {
                 if (response.isSuccessful()) {
                     SurveyResponse result = response.body();
-                    String nickname1 = result.getNickname1();
-                    String nickname2 = result.getNickname2();
-                    String nickname3 = result.getNickname3();
-                    String filename1 = result.getFilename1();
-                    String filename2 = result.getFilename2();
-                    String filename3 = result.getFilename3();
+                    nickname1 = result.getNickname1();
+                    filename1 = result.getFilename1();
+                    number1 = result.getNumber1();
+                    nickname2 = result.getNickname2();
+                    filename2 = result.getFilename2();
+                    number2 = result.getNumber2();
+                    nickname3 = result.getNickname3();
+                    filename3 = result.getFilename3();
+                    number3 = result.getNumber3();
+                    int heart_num = result.getHeartNum();
+
+                    ProfileClass profileClass = ProfileClass.getInstance();
+                    profileClass.setUser_number(user_number);
+                    profileClass.setUser_password(user_password);
+                    profileClass.setUser_nickname(user_nickname);
+                    profileClass.setUser_name(user_name);
+                    profileClass.setUser_filename(filename);
 
                     Intent intent = new Intent(SurveyActivity.this, MainAppActivity.class);
                     intent.putExtra("nickname1", nickname1);
-                    intent.putExtra("nickname2", nickname2);
-                    intent.putExtra("nickname3", nickname3);
                     intent.putExtra("filename1", filename1);
+                    intent.putExtra("number1", number1);
+                    intent.putExtra("nickname2", nickname2);
                     intent.putExtra("filename2", filename2);
+                    intent.putExtra("number2", number2);
+                    intent.putExtra("nickname3", nickname3);
                     intent.putExtra("filename3", filename3);
+                    intent.putExtra("number3", number3);
+                    intent.putExtra("user_number", user_number);
+                    intent.putExtra("heart_num", heart_num);
                     startActivity(intent);
                     Log.v(TAG, "result = " + result);
                 } else {
@@ -284,7 +301,6 @@ public class SurveyActivity extends AppCompatActivity implements FragmentListene
             }
         }
     }
-
 
 
 }

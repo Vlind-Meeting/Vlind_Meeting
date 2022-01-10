@@ -87,7 +87,8 @@ public class FinalMatchActivity extends AppCompatActivity {
         placeName.add("비바릴리 도안점");
         placeURL.add("http://naver.me/xZDOT1lg");
 
-        n=(int)((Math.random()*11)+0);
+        //여기서 n값 데이터베이스에서 가져오기
+        n=0;
         place_info.setText(placeName.get(n));
         i.setData(Uri.parse(placeURL.get(n)));
 

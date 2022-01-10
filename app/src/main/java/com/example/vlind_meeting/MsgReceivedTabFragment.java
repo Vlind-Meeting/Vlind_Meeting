@@ -31,6 +31,7 @@ public class MsgReceivedTabFragment extends Fragment {
 
     MediaPlayer mediaPlayer;
     String fileName;
+    int n;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -99,6 +100,8 @@ public class MsgReceivedTabFragment extends Fragment {
                         .setNegativeButton("수락", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                //여기서 n값 데베로
+                                n=(int)((Math.random()*11)+0);
                                 mList.remove(position);
                                 mRecyclerViewAdapter.notifyItemRemoved(position);
                                 Intent intent = new Intent(requireActivity(), FinalMatchActivity.class);

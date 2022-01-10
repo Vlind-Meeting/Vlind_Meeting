@@ -1,6 +1,7 @@
 package com.example.vlind_meeting;
 
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 public class MsgSentRecyclerAdapter extends RecyclerView.Adapter<MsgSentRecyclerAdapter.ViewHolder> {
 
     private ArrayList<MsgSentRecyclerItem> mSentList;
+    private Resources res;
 
     @NonNull
     @Override
@@ -28,7 +30,7 @@ public class MsgSentRecyclerAdapter extends RecyclerView.Adapter<MsgSentRecycler
         holder.onBind(mSentList.get(position));
     }
 
-    public void setFriendList(ArrayList<MsgSentRecyclerItem> list){
+    public void setSentList(ArrayList<MsgSentRecyclerItem> list){
         this.mSentList = list;
         notifyDataSetChanged();
     }
@@ -40,21 +42,18 @@ public class MsgSentRecyclerAdapter extends RecyclerView.Adapter<MsgSentRecycler
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView profile;
-        TextView name;
-        TextView message;
+        TextView nickname;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            res = itemView.getResources();
             profile = (ImageView) itemView.findViewById(R.id.profile);
-            name = (TextView) itemView.findViewById(R.id.nickname);
-            message = (TextView) itemView.findViewById(R.id.message);
+            nickname = (TextView) itemView.findViewById(R.id.nickname);
         }
 
         void onBind(MsgSentRecyclerItem item){
-            profile.setImageResource(item.getResourceId());
-            name.setText(item.getName());
-            message.setText(item.getMessage());
+            profile.setColorFilter(res.getColor(item.getResourceId()));
+            nickname.setText(item.getNickname());
         }
     }
 }

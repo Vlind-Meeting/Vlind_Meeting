@@ -8,16 +8,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="295dp"
         android:layout_height="315dp"
-        android:background="@drawable/final_style"
+        android:background="@drawable/btn2_style"
         android:backgroundTint="@color/white"
         android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.884">
 
 
         <ImageView
@@ -34,6 +33,7 @@
             app:srcCompat="@drawable/naver_map" />
 
         <ImageView
+            android:id="@+id/location_icon"
             android:layout_width="30dp"
             android:layout_height="37dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -63,6 +63,7 @@
             app:layout_constraintVertical_bias="0.55" />
 
         <ImageView
+            android:id="@+id/time_icon"
             android:layout_width="30dp"
             android:layout_height="37dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -95,8 +96,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/basic"
             android:text="2022.01.10 금요일 PM 6시"
-            android:textSize="16dp"
             android:textColor="@color/black"
+            android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.666"
@@ -112,8 +113,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/basic"
             android:gravity="left"
-            android:textColor="@color/black"
             android:text="모모가든 비스트로"
+            android:textColor="@color/black"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -128,8 +129,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/basic"
             android:text="약속 장소까지 네이버 길찾기"
-            android:textSize="9dp"
             android:textColor="#A3A3A3"
+            android:textSize="9dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.299"
@@ -151,24 +152,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.222" />
-
-    <TextView
-        android:id="@+id/user_nickname"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/basic"
-        android:gravity="right"
-        android:text="핸스"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.051"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.313" />
+        app:layout_constraintVertical_bias="0.143" />
 
     <TextView
         android:id="@+id/matched_nickname"
@@ -185,7 +169,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.313" />
+        app:layout_constraintVertical_bias="0.258" />
 
     <TextView
         android:id="@+id/info"
@@ -194,12 +178,31 @@
         android:fontFamily="@font/basic_3"
         android:text="매칭 성공"
         android:textSize="18dp"
+        android:textColor="#F3A3A3"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.415" />
+        app:layout_constraintVertical_bias="0.359" />
+
+    <TextView
+        android:id="@+id/user_nickname"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/basic"
+        android:gravity="right"
+        android:text="핸스"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.258" />
 
     <ImageView
         android:layout_width="35dp"
@@ -210,7 +213,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.096"
+        app:layout_constraintVertical_bias="0.053"
         app:srcCompat="@drawable/icon" />
 
     <TextView
@@ -224,8 +227,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.114" />
-
+        app:layout_constraintVertical_bias="0.069" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

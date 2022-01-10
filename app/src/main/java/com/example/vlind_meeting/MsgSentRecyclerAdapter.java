@@ -1,6 +1,7 @@
 package com.example.vlind_meeting;
 
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 public class MsgSentRecyclerAdapter extends RecyclerView.Adapter<MsgSentRecyclerAdapter.ViewHolder> {
 
     private ArrayList<MsgSentRecyclerItem> mSentList;
+    private Resources res;
 
     @NonNull
     @Override
@@ -44,13 +46,13 @@ public class MsgSentRecyclerAdapter extends RecyclerView.Adapter<MsgSentRecycler
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            res = itemView.getResources();
             profile = (ImageView) itemView.findViewById(R.id.profile);
             nickname = (TextView) itemView.findViewById(R.id.nickname);
         }
 
         void onBind(MsgSentRecyclerItem item){
-            profile.setImageResource(item.getResourceId());
+            profile.setColorFilter(res.getColor(item.getResourceId()));
             nickname.setText(item.getNickname());
         }
     }

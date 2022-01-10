@@ -78,6 +78,7 @@
             android:layout_height="wrap_content"
             app:tabTextColor="#A5A5A5"
             app:tabSelectedTextColor="@color/black"
+            app:tabTextAppearance="@style/TabText"
             >
 
             <com.google.android.material.tabs.TabItem

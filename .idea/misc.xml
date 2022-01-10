@@ -33,7 +33,7 @@
         <entry key="..\:/Users/hyhsu/AndroidStudioProjects/Vlind_Meeting/app/src/main/res/layout/activity_app_main.xml" value="0.2" />
         <entry key="..\:/Users/hyhsu/AndroidStudioProjects/Vlind_Meeting/app/src/main/res/layout/activity_app_match.xml" value="0.198046875" />
         <entry key="..\:/Users/hyhsu/AndroidStudioProjects/Vlind_Meeting/app/src/main/res/layout/activity_confirm.xml" value="0.2640625" />
-        <entry key="..\:/Users/hyhsu/AndroidStudioProjects/Vlind_Meeting/app/src/main/res/layout/activity_final_match.xml" value="0.136" />
+        <entry key="..\:/Users/hyhsu/AndroidStudioProjects/Vlind_Meeting/app/src/main/res/layout/activity_final_match.xml" value="0.152" />
         <entry key="..\:/Users/hyhsu/AndroidStudioProjects/Vlind_Meeting/app/src/main/res/layout/activity_join.xml" value="0.2" />
         <entry key="..\:/Users/hyhsu/AndroidStudioProjects/Vlind_Meeting/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/hyhsu/AndroidStudioProjects/Vlind_Meeting/app/src/main/res/layout/activity_main.xml" value="0.2" />
@@ -56,8 +56,8 @@
         <entry key="..\:/Users/hyhsu/AndroidStudioProjects/Vlind_Meeting/app/src/main/res/layout/item_slider.xml" value="0.274609375" />
         <entry key="..\:/Users/hyhsu/AndroidStudioProjects/Vlind_Meeting/app/src/main/res/layout/match_1.xml" value="0.198046875" />
         <entry key="..\:/Users/hyhsu/AndroidStudioProjects/Vlind_Meeting/app/src/main/res/layout/match_2.xml" value="0.198046875" />
-        <entry key="..\:/Users/hyhsu/AndroidStudioProjects/Vlind_Meeting/app/src/main/res/layout/recycler_item_received.xml" value="0.4" />
-        <entry key="..\:/Users/hyhsu/AndroidStudioProjects/Vlind_Meeting/app/src/main/res/layout/recycler_item_sent.xml" value="0.2" />
+        <entry key="..\:/Users/hyhsu/AndroidStudioProjects/Vlind_Meeting/app/src/main/res/layout/recycler_item_received.xml" value="0.176" />
+        <entry key="..\:/Users/hyhsu/AndroidStudioProjects/Vlind_Meeting/app/src/main/res/layout/recycler_item_sent.xml" value="0.4" />
         <entry key="..\:/Users/hyhsu/AndroidStudioProjects/Vlind_Meeting/app/src/main/res/layout/tool_bart.xml" value="0.12" />
       </map>
     </option>

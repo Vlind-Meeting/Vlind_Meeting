@@ -3,6 +3,7 @@ package com.example.vlind_meeting;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
@@ -45,6 +46,10 @@ public class MsgReceivedTabFragment extends Fragment {
     ResponseMessage responseMessage;
     private String receive_number;
 
+    int red = 0;
+    int blue =0;
+    int green = 0;
+
     public MsgReceivedTabFragment(MsgListener listener, String receive_number) {
         this.msgListener = listener;
         this.receive_number = receive_number;
@@ -82,7 +87,11 @@ public class MsgReceivedTabFragment extends Fragment {
 //        }
 
         for(int i = 0; i < nicknames.size(); i++){
-            mList.add(new MsgReceivedRecyclerItem(R.color.black, nicknames.get(i), "Press to Play", ""));
+            red = (int)(Math.random() * 255);
+            blue = (int)(Math.random() * 255);
+            green = (int)(Math.random() * 255);
+
+            mList.add(new MsgReceivedRecyclerItem(Color.rgb(red, green, blue), nicknames.get(i), "Press to Play", ""));
         }
 
         mRecyclerViewAdapter.setReceivedList(mList);

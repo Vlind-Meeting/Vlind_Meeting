@@ -109,7 +109,7 @@ public class MsgReceivedRecyclerAdapter extends RecyclerView.Adapter<MsgReceived
         }
 
         void onBind(MsgReceivedRecyclerItem item){
-            sound_btn.setColorFilter(res.getColor(item.getResourceId()));
+            sound_btn.setColorFilter(item.getResourceId());
             nickname.setText(item.getNickname());
             soundState.setText(item.getSoundState());
             soundInfo.setText(item.getSoundInfo());

@@ -41,7 +41,7 @@ public class Q7Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup viewgroup = (ViewGroup) inflater.inflate(R.layout.fragment_q2, container, false);
+        ViewGroup viewgroup = (ViewGroup) inflater.inflate(R.layout.fragment_q7, container, false);
         next_button = (Button) viewgroup.findViewById(R.id.next_button);
         radioGroup = (RadioGroup) viewgroup.findViewById(R.id.radioGroup);
         radioButton1 = (RadioButton) viewgroup.findViewById(R.id.radioButton1);

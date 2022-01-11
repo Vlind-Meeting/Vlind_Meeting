@@ -1,6 +1,7 @@
 package com.example.vlind_meeting;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,8 +26,8 @@ public class FinalMatchActivity extends AppCompatActivity {
     private GifDrawable gif;
     private ImageView place_map;
     private TextView place_info;
+    private ImageView location_icon, time_icon;
 
-    List<Integer> placeNum = new ArrayList<Integer>();
     List<String> placeName = new ArrayList<String>();
     List<String> placeURL = new ArrayList<String>();
     int n;
@@ -36,6 +37,11 @@ public class FinalMatchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_match);
+
+        location_icon = (ImageView) findViewById(R.id.location_icon);
+        time_icon = (ImageView) findViewById(R.id.time_icon);
+        location_icon.setColorFilter(getResources().getColor(R.color.tiffany));
+        time_icon.setColorFilter(getResources().getColor(R.color.tiffany));
 
         try {
             gif = new GifDrawable(getResources(), R.drawable.match_success);
@@ -81,7 +87,8 @@ public class FinalMatchActivity extends AppCompatActivity {
         placeName.add("비바릴리 도안점");
         placeURL.add("http://naver.me/xZDOT1lg");
 
-        n=(int)((Math.random()*11)+0);
+        //여기서 n값 데이터베이스에서 가져오기
+        n=0;
         place_info.setText(placeName.get(n));
         i.setData(Uri.parse(placeURL.get(n)));
 

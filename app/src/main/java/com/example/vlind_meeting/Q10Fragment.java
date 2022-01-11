@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 public class Q10Fragment extends Fragment {
@@ -20,6 +22,7 @@ public class Q10Fragment extends Fragment {
     private String user_mbti;
     FragmentListener fragmentListener;
 
+    ConstraintLayout layout;
 
     public Q10Fragment() {
         // Required empty public constructor
@@ -58,6 +61,15 @@ public class Q10Fragment extends Fragment {
                     fragmentListener.set10(user_mbti);
                     fragmentListener.submit();
                 }
+            }
+        });
+
+        layout = (ConstraintLayout) viewgroup.findViewById(R.id.layout);
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(mbti.getWindowToken(), 0);
             }
         });
 

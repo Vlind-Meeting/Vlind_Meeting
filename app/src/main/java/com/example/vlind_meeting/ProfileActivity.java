@@ -13,11 +13,13 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import org.w3c.dom.Text;
 
@@ -37,6 +39,8 @@ public class ProfileActivity extends AppCompatActivity {
     private Button edit_pwd;
     private EditText nickname, pwd;
     private TextView sound_state, sound_info, text_name, text_phone, text_nickname, text_password;
+
+    ConstraintLayout layout, layout_2;
 
     ResponseSurvey responseSurvey;
     ResponseProfile responseProfile;
@@ -63,14 +67,6 @@ public class ProfileActivity extends AppCompatActivity {
         user_nickname = profileClass.getUser_nickname();
         user_name = profileClass.getUser_name();
         user_filename = profileClass.getUser_filename();
-//        System.out.println('!');
-//        System.out.println(user_name);
-//        System.out.println(user_filename);
-//        System.out.println(user_nickname);
-//        System.out.println(user_number);
-//        System.out.println(user_password);
-//        System.out.println('!');
-
 
 
         msg_btn = (Button) findViewById(R.id.msg_btn);
@@ -267,6 +263,26 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 });
 
+            }
+        });
+
+        layout = (ConstraintLayout) findViewById(R.id.layout);
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(nickname.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(pwd.getWindowToken(), 0);
+            }
+        });
+
+        layout_2 = (ConstraintLayout) findViewById(R.id.layout_2);
+        layout_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(nickname.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(pwd.getWindowToken(), 0);
             }
         });
 

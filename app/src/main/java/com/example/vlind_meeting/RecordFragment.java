@@ -102,7 +102,7 @@ public class RecordFragment extends Fragment{
         String name = fragmentListener.getUserNumber() + ".mp4";
         File file = new File(Environment.getExternalStorageDirectory(), name);
         fileName = file.getAbsolutePath();  // 파일 위치 가져옴
-        Toast.makeText(getActivity().getApplicationContext(), "파일 위치:"+ fileName, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity().getApplicationContext(), "파일 위치:"+ fileName, Toast.LENGTH_SHORT).show();
 
         record.setOnClickListener(new View.OnClickListener() {
 
@@ -123,7 +123,7 @@ public class RecordFragment extends Fragment{
                     try {
                         recorder.prepare();
                         recorder.start();
-                        Toast.makeText(getActivity().getApplicationContext(), "녹음시작", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity().getApplicationContext(), "녹음시작", Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {e.printStackTrace();}
                 }
                 else if(n%3==1){
@@ -135,7 +135,7 @@ public class RecordFragment extends Fragment{
                         recorder.release();
                         recorder = null;
                     }
-                    Toast.makeText(getActivity().getApplicationContext(), "녹음중지", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity().getApplicationContext(), "녹음중지", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     gif.start();

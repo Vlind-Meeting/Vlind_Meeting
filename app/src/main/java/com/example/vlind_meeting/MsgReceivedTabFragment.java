@@ -49,6 +49,7 @@ public class MsgReceivedTabFragment extends Fragment {
         this.msgListener = listener;
         this.receive_number = receive_number;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -137,6 +138,7 @@ public class MsgReceivedTabFragment extends Fragment {
                         .setNegativeButton("수락", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+
                                 String send_number = numbers.get(position);
                                 responseMessage = RetrofitClientInstance.getClient().create(ResponseMessage.class);
                                 MatchRequest matchRequest = new MatchRequest(send_number, receive_number);
@@ -161,6 +163,7 @@ public class MsgReceivedTabFragment extends Fragment {
 
                                     }
                                 });
+
                             }
                         })
                         .setPositiveButton("취소", new DialogInterface.OnClickListener() {
@@ -175,7 +178,12 @@ public class MsgReceivedTabFragment extends Fragment {
             //현재는 거절을 하면 recycler view item list에서 삭제하도록 만들어놨다.
             //이를 db에서 삭제로 바꾸면 됨
             @Override
-            public void onDenyClick(View v, int position) {
+            public void o
+              
+              
+              
+              
+              DenyClick(View v, int position) {
                 new AlertDialog.Builder(requireContext())
                         .setTitle("매칭 신청 거절")
                         .setMessage("매칭 신청을 거절하시겠습니까?")

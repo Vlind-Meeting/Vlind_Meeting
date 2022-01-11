@@ -1,12 +1,14 @@
 package com.example.vlind_meeting;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,6 +27,7 @@ public class FinalMatchActivity extends AppCompatActivity {
     private GifDrawable gif;
     private ImageView place_map;
     private TextView place_info;
+
     private String n0, send_number, receive_number;
     private int n;
     List<Integer> placeNum = new ArrayList<Integer>();
@@ -32,11 +35,15 @@ public class FinalMatchActivity extends AppCompatActivity {
     List<String> placeURL = new ArrayList<String>();
     TextView text_nickname;
     TextView text_match_nickname;
+    private ImageView location_icon, time_icon;
+
+    private long backpressedTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_match);
+
 
         Intent intent = getIntent();
         n0 = intent.getExtras().getString("n");
@@ -49,6 +56,12 @@ public class FinalMatchActivity extends AppCompatActivity {
 
         text_nickname.setText(receive_number);
         text_match_nickname.setText(send_number);
+
+        location_icon = (ImageView) findViewById(R.id.location_icon);
+        time_icon = (ImageView) findViewById(R.id.time_icon);
+        location_icon.setColorFilter(getResources().getColor(R.color.tiffany));
+        time_icon.setColorFilter(getResources().getColor(R.color.tiffany));
+
 
         try {
             gif = new GifDrawable(getResources(), R.drawable.match_success);
@@ -93,7 +106,6 @@ public class FinalMatchActivity extends AppCompatActivity {
 
         placeName.add("비바릴리 도안점");
         placeURL.add("http://naver.me/xZDOT1lg");
-
         place_info.setText(placeName.get(n));
 
         Intent i = new Intent(Intent.ACTION_VIEW);
@@ -105,5 +117,18 @@ public class FinalMatchActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+//        if (System.currentTimeMillis() > backpressedTime + 2000) {
+//            backpressedTime = System.currentTimeMillis();
+////            Toast.makeText(this, "\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+//        } else if (System.currentTimeMillis() <= backpressedTime + 2000) {
+//            moveTaskToBack(true);
+//            finishAndRemoveTask();
+//            System.exit(0);
+//        }
     }
 }

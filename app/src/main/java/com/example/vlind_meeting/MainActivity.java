@@ -4,12 +4,17 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,11 +35,13 @@ public class MainActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private ResponseLogin responseLogin;
     private ResponseMessage responseMessage;
+    FrameLayout layout;
+  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-//        setActionBar();
+
         login_number = (EditText) findViewById(R.id.login_number);
         login_password = (EditText) findViewById(R.id.mbti);
         join_button = (TextView) findViewById(R.id.join_button);
@@ -141,16 +148,18 @@ public class MainActivity extends AppCompatActivity {
                     });
 
                 }
-
-
             }
+        });
 
+        layout = (FrameLayout) findViewById(R.id.layout);
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(login_number.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(login_password.getWindowToken(), 0);
+            }
         });
     }
 
-//    private void setActionBar(){
-//        // 커스텀 액션바 적용
-//        CustomActionBar ca = new CustomActionBar(this, getSupportActionBar());
-//        ca.setActionBar();
-//    }
 }

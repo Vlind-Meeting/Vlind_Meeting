@@ -1,14 +1,17 @@
 package com.example.vlind_meeting;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import okhttp3.ResponseBody;
@@ -19,6 +22,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.io.IOException;
 
@@ -31,6 +35,8 @@ public class JoinActivity extends AppCompatActivity {
     private Button join_button, delete_button;
     private Retrofit retrofit;
     private ResponseLogin responseLogin;
+
+    ConstraintLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,28 +133,22 @@ public class JoinActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Response Fail", Toast.LENGTH_SHORT).show();
                             }
                         });
-
-//                        new AlertDialog.Builder(JoinActivity.this)
-//                                .setTitle("동의")
-//                                .setMessage("hihihi")
-//                                .setNeutralButton("Confirm", new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialogInterface, int i) {
-//                                        Intent intent = new Intent(JoinActivity.this, JoinSurveyActivity.class);
-//                                        intent.putExtra("user_gender", user_gender);
-//                                        intent.putExtra("user_password", user_password);
-//                                        intent.putExtra("user_name", user_name);
-//                                        intent.putExtra("user_number", user_number);
-//                                        intent.putExtra("user_nickname", user_nickname);
-//                                        startActivity(intent);
-//                                    }
-//                                })
-//                                .show();
-
                     }
-
                 }
             }
         });
+
+        layout = (ConstraintLayout) findViewById(R.id.layout);
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(join_name.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(join_nickname.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(join_number.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(join_password.getWindowToken(), 0);
+            }
+        });
+
     };
 }

@@ -57,7 +57,7 @@ public class ProfileActivity extends AppCompatActivity {
     ResponseMessage responseMessage;
 
     private String filename1, filename2, filename3, nickname1, nickname2, nickname3, number1, number2, number3;
-    int n=0;
+    private int n=0;
     MediaRecorder recorder;
     String fileName;
     MediaPlayer mediaPlayer;
@@ -249,7 +249,7 @@ public class ProfileActivity extends AppCompatActivity {
                     try {
                         recorder.prepare();
                         recorder.start();
-                        Toast.makeText(getApplicationContext(), "녹음시작", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "녹음시작", Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {e.printStackTrace();}
                 }
                 else{
@@ -260,7 +260,7 @@ public class ProfileActivity extends AppCompatActivity {
                         recorder.release();
                         recorder = null;
                     }
-                    Toast.makeText(getApplicationContext(), "녹음중지", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), "녹음중지", Toast.LENGTH_SHORT).show();
                 }
                 n++;
             }

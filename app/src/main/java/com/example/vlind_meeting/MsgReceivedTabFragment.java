@@ -101,15 +101,8 @@ public class MsgReceivedTabFragment extends Fragment {
             //파일 위치만 데이터베이스에서 가져오면 됨.
             @Override
             public void onSoundClick(View v, int position) {
-                System.out.println('!');
-                System.out.println(position);
-                System.out.println(nicknames.get(position));
-                System.out.println(filenames.get(position));
-                System.out.println(numbers.get(position));
-//                File file = new File(Environment.getExternalStorageDirectory(), "01.mp4");
-//                fileName = file.getAbsolutePath();  // 파일 위치 가져옴
                 fileName = filenames.get(position);
-                Toast.makeText(getActivity().getApplicationContext(), "파일 위치:"+fileName, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity().getApplicationContext(), "파일 위치:"+fileName, Toast.LENGTH_SHORT).show();
 
                 mList.get(position).setSoundState("Playing");
 
@@ -147,7 +140,6 @@ public class MsgReceivedTabFragment extends Fragment {
                         .setNegativeButton("수락", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
                                 String send_number = numbers.get(position);
                                 responseMessage = RetrofitClientInstance.getClient().create(ResponseMessage.class);
                                 MatchRequest matchRequest = new MatchRequest(send_number, receive_number);
@@ -159,6 +151,8 @@ public class MsgReceivedTabFragment extends Fragment {
                                         String send_number = resp.getSend_number();
                                         String receive_number = resp.getReceive_number();
                                         mList.remove(position);
+                                        numbers.remove(position);
+                                        filenames.remove(position);
                                         mRecyclerViewAdapter.notifyItemRemoved(position);
                                         Intent intent = new Intent(requireActivity(), FinalMatchActivity.class);
                                         intent.putExtra("n", n);
@@ -194,7 +188,6 @@ public class MsgReceivedTabFragment extends Fragment {
                         .setNegativeButton("거절", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
                                 String send_number = numbers.get(position);
                                 responseMessage = RetrofitClientInstance.getClient().create(ResponseMessage.class);
                                 MatchRequest matchRequest = new MatchRequest(send_number, receive_number);
@@ -204,6 +197,8 @@ public class MsgReceivedTabFragment extends Fragment {
                                         String result = response.body().toString();
                                         System.out.println(result);
                                         mList.remove(position);
+                                        numbers.remove(position);
+                                        filenames.remove(position);
                                         mRecyclerViewAdapter.notifyItemRemoved(position);
                                     }
 

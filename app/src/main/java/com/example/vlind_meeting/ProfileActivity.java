@@ -245,7 +245,7 @@ public class ProfileActivity extends AppCompatActivity {
                     recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);    // 출력 형식 지정
                     //마이크로 들어오는 음성데이터는 용량이 크기 때문에 압축이 필요
                     recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);   // 인코딩
-                    recorder.setOutputFile(fileName);  // 음성 데이터를 저장할 파일 지정
+                    recorder.setOutputFile(user_filename);  // 음성 데이터를 저장할 파일 지정
                     try {
                         recorder.prepare();
                         recorder.start();

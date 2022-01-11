@@ -209,7 +209,7 @@ public class ProfileActivity extends AppCompatActivity {
         sound_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(n%2==0){
+                if(n%3==0){
                     //녹음 재생
                     sound_state.setText("Playing");
                     sound_info.setText("press to record");

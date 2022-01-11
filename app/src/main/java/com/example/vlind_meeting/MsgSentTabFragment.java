@@ -1,5 +1,6 @@
 package com.example.vlind_meeting;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,10 @@ public class MsgSentTabFragment extends Fragment {
     private MsgListener msgListener;
     private ArrayList<String> nicknames;
     private ArrayList<String> numbers;
+
+    int red = 0;
+    int blue =0;
+    int green = 0;
 
     public MsgSentTabFragment(MsgListener listener) {
         this.msgListener = listener;
@@ -59,7 +64,11 @@ public class MsgSentTabFragment extends Fragment {
 
         mList.clear();
         for(int i = 0; i < nicknames.size(); i++){
-            mList.add(new MsgSentRecyclerItem(R.color.purple_200, nicknames.get(i)));
+            red = (int)(Math.random() * 255);
+            blue = (int)(Math.random() * 255);
+            green = (int)(Math.random() * 255);
+
+            mList.add(new MsgSentRecyclerItem(Color.rgb(red, green, blue), nicknames.get(i)));
         }
 
         mRecyclerViewAdapter.setSentList(mList);

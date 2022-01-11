@@ -52,7 +52,7 @@ public class MsgSentRecyclerAdapter extends RecyclerView.Adapter<MsgSentRecycler
         }
 
         void onBind(MsgSentRecyclerItem item){
-            profile.setColorFilter(res.getColor(item.getResourceId()));
+            profile.setColorFilter(item.getResourceId());
             nickname.setText(item.getNickname());
         }
     }

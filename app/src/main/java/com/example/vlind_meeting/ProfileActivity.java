@@ -57,7 +57,7 @@ public class ProfileActivity extends AppCompatActivity {
     ResponseMessage responseMessage;
 
     private String filename1, filename2, filename3, nickname1, nickname2, nickname3, number1, number2, number3;
-    int n=0;
+    private int n=0;
     MediaRecorder recorder;
     String fileName;
     MediaPlayer mediaPlayer;
@@ -245,11 +245,11 @@ public class ProfileActivity extends AppCompatActivity {
                     recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);    // 출력 형식 지정
                     //마이크로 들어오는 음성데이터는 용량이 크기 때문에 압축이 필요
                     recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);   // 인코딩
-                    recorder.setOutputFile(fileName);  // 음성 데이터를 저장할 파일 지정
+                    recorder.setOutputFile(user_filename);  // 음성 데이터를 저장할 파일 지정
                     try {
                         recorder.prepare();
                         recorder.start();
-                        Toast.makeText(getApplicationContext(), "녹음시작", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "녹음시작", Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {e.printStackTrace();}
                 }
                 else{
@@ -260,7 +260,7 @@ public class ProfileActivity extends AppCompatActivity {
                         recorder.release();
                         recorder = null;
                     }
-                    Toast.makeText(getApplicationContext(), "녹음중지", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), "녹음중지", Toast.LENGTH_SHORT).show();
                 }
                 n++;
             }

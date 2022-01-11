@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -20,7 +21,7 @@ public class Q6Fragment extends Fragment {
     int x;
     FragmentListener fragmentListener;
     private RadioButton radioButton1, radioButton2, radioButton3, radioButton4, radioButton5;
-
+    ProgressBar p_bar;
 
     public Q6Fragment() {
         // Required empty public constructor
@@ -48,6 +49,9 @@ public class Q6Fragment extends Fragment {
         radioButton3 = (RadioButton) viewgroup.findViewById(R.id.radioButton3);
         radioButton4 = (RadioButton) viewgroup.findViewById(R.id.radioButton4);
         radioButton5 = (RadioButton) viewgroup.findViewById(R.id.radioButton5);
+
+        p_bar = (ProgressBar) viewgroup.findViewById(R.id.progressBar);
+        p_bar.setProgress(6);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

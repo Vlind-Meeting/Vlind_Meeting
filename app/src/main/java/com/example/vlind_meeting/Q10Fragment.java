@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -23,6 +24,7 @@ public class Q10Fragment extends Fragment {
     FragmentListener fragmentListener;
 
     ConstraintLayout layout;
+    ProgressBar p_bar;
 
     public Q10Fragment() {
         // Required empty public constructor
@@ -45,6 +47,9 @@ public class Q10Fragment extends Fragment {
         ViewGroup viewgroup = (ViewGroup) inflater.inflate(R.layout.fragment_q10, container, false);
         submit = (Button) viewgroup.findViewById(R.id.submit);
         mbti = (EditText) viewgroup.findViewById(R.id.mbti);
+
+        p_bar = (ProgressBar) viewgroup.findViewById(R.id.progressBar);
+        p_bar.setProgress(10);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,6 +33,7 @@ public class FinalMatchActivity extends AppCompatActivity {
     List<String> placeURL = new ArrayList<String>();
     int n;
     Intent i = new Intent(Intent.ACTION_VIEW);
+    private long backpressedTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,5 +100,18 @@ public class FinalMatchActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+//        if (System.currentTimeMillis() > backpressedTime + 2000) {
+//            backpressedTime = System.currentTimeMillis();
+////            Toast.makeText(this, "\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+//        } else if (System.currentTimeMillis() <= backpressedTime + 2000) {
+//            moveTaskToBack(true);
+//            finishAndRemoveTask();
+//            System.exit(0);
+//        }
     }
 }

@@ -18,19 +18,19 @@
   
 #### 회원가입
 * 기본 회원정보
-      - 이름, 닉네임, 전화번호, 비밀번호, 성별을 입력합니다.
+  * 이름, 닉네임, 전화번호, 비밀번호, 성별을 입력합니다.
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/78015565/148944257-d61570b7-893b-4a56-8c90-a8c2ab287b0d.jpg" width="200" height="400"/> 
+<img src="https://user-images.githubusercontent.com/78015565/148944257-d61570b7-893b-4a56-8c90-a8c2ab287b0d.jpg" width="200" height="400"/> 
 </p>
-- 목소리 회원정보
-      - 본인을 어필할 수 있는 한 마디를 녹음해 다른 사용자에게 공유합니다.
+* 목소리 회원정보
+  * 본인을 어필할 수 있는 한 마디를 녹음해 다른 사용자에게 공유합니다.
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/78015565/148944386-8848c8f1-fdb1-4972-a379-8d405fd4e987.jpg" width="200" height="400"/> 
+<img src="https://user-images.githubusercontent.com/78015565/148944386-8848c8f1-fdb1-4972-a379-8d405fd4e987.jpg" width="200" height="400"/> 
 </p>
-  - 매칭 설문지
-      - MBTI를 포함한 질문 10가지를 대상으로 설문을 진행하며, 설문 결과는 이상형 매치 시 사용됩니다. 
+* 매칭 설문지
+  * MBTI를 포함한 질문 10가지를 대상으로 설문을 진행하며, 설문 결과는 이상형 매치 시 사용됩니다. 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/78015565/148944598-2348ecbc-8153-4e9a-b1b3-ee152fe236df.jpg"width="200" height="400"/> 
+<img src="https://user-images.githubusercontent.com/78015565/148944598-2348ecbc-8153-4e9a-b1b3-ee152fe236df.jpg"width="200" height="400"/> 
 </p>
 
 ## My Profile: 내 정보 확인

@@ -4,14 +4,14 @@ public class MsgReceivedRecyclerItem {
     String nickname;
     int resourceId;
     String soundState, soundInfo;
-    int n=0;
+//    int n=0;
 
-    public MsgReceivedRecyclerItem(int resourceId, String nickname, String soundState, String soundInfo, int n) {
+    public MsgReceivedRecyclerItem(int resourceId, String nickname, String soundState, String soundInfo) {
         this.nickname = nickname;
         this.resourceId = resourceId;
         this.soundState = soundState;
         this.soundInfo = soundInfo;
-        this.n = n;
+//        this.n = n;
     }
 
     public int getResourceId() {
@@ -26,7 +26,7 @@ public class MsgReceivedRecyclerItem {
 
     public String getSoundInfo() { return soundInfo; }
 
-    public int getN() { return n; }
+//    public int getN() { return n; }
 
     public void setResourceId(int resourceId) {
         this.resourceId = resourceId;
@@ -40,6 +40,6 @@ public class MsgReceivedRecyclerItem {
 
     public void setSoundInfo(String soundInfo) { this.soundInfo = soundInfo; }
 
-    public void setN(int n) { this.n = n; }
+//    public void setN(int n) { this.n = n; }
 
 }

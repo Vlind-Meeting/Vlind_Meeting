@@ -18,6 +18,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator3;
 import okhttp3.ResponseBody;
@@ -38,8 +40,14 @@ public class MainAppActivity extends AppCompatActivity implements MatchingListen
     public String nickname1, nickname2, nickname3, filename1, filename2, filename3, number1, number2, number3, receive_number;
     public int heart_num;
 
+    private List<SendResponse> result;
+    private ArrayList<SendResponse> result_intent = new ArrayList<SendResponse>();;
+    private List<ReceiveResponse> result0;
+    private ArrayList<ReceiveResponse> result0_intent = new ArrayList<ReceiveResponse>();
+
     HeartRequest heartRequest;
     ResponseSurvey responseSurvey;
+    ResponseMessage responseMessage;
     private String user_voice, user_name, user_password, user_gender, user_number, user_nickname;
 
     @Override
@@ -80,9 +88,55 @@ public class MainAppActivity extends AppCompatActivity implements MatchingListen
         msg_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainAppActivity.this, MsgActivity.class);
-                intent.putExtra("user_number", user_number);
-                startActivity(intent);
+                responseMessage = RetrofitClientInstance.getClient().create(ResponseMessage.class);
+
+                responseMessage.sendFunc(user_number).enqueue(new Callback<List<SendResponse>>(){
+                    @Override
+                    public void onResponse(Call<List<SendResponse>> call, Response<List<SendResponse>> response) {
+                        if (response.isSuccessful()) {
+                            result_intent.clear();
+                            result = response.body();
+                            result_intent.addAll(result);
+//                            System.out.println('!');
+//                            for(int i = 0; i < result.size(); i++)
+//                                System.out.println(result.get(i).getNickname());
+//                            System.out.println('!');
+                            responseMessage.receiveFunc(user_number).enqueue(new Callback<List<ReceiveResponse>>(){
+                                @Override
+                                public void onResponse(Call<List<ReceiveResponse>> call, Response<List<ReceiveResponse>> response0) {
+                                    if (response0.isSuccessful()) {
+                                        result0_intent.clear();
+                                        result0 = response0.body();
+                                        result0_intent.addAll(result0);
+
+                                        Intent intent = new Intent(MainAppActivity.this, MsgActivity.class);
+                                        intent.putExtra("result_intent", result_intent);
+                                        intent.putExtra("result0_intent", result0_intent);
+                                        intent.putExtra("user_number", user_number);
+                                        startActivity(intent);
+                                    }
+                                    else{
+                                        Toast.makeText(getApplicationContext(), "profile activity error occurred", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<List<ReceiveResponse>> call, Throwable t) {
+                                    Toast.makeText(getApplicationContext(), "Response Fail", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), "profile activity error occurred", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<SendResponse>> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Response Fail", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Parcelable;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -23,6 +24,9 @@ import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -37,9 +41,16 @@ public class ProfileActivity extends AppCompatActivity {
     private Button edit_pwd;
     private EditText nickname, pwd;
     private TextView sound_state, sound_info, text_name, text_phone, text_nickname, text_password;
+    private List<SendResponse> result;
+    private ArrayList<SendResponse> result_intent = new ArrayList<SendResponse>();;
+    private List<ReceiveResponse> result0;
+    private ArrayList<ReceiveResponse> result0_intent = new ArrayList<ReceiveResponse>();
+
+
 
     ResponseSurvey responseSurvey;
     ResponseProfile responseProfile;
+    ResponseMessage responseMessage;
 
     private String filename1, filename2, filename3, nickname1, nickname2, nickname3, number1, number2, number3;
     int n=0;
@@ -79,9 +90,55 @@ public class ProfileActivity extends AppCompatActivity {
         msg_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity.this, MsgActivity.class);
-                intent.putExtra("user_number", user_number);
-                startActivity(intent);
+                responseMessage = RetrofitClientInstance.getClient().create(ResponseMessage.class);
+
+                responseMessage.sendFunc(user_number).enqueue(new Callback<List<SendResponse>>(){
+                    @Override
+                    public void onResponse(Call<List<SendResponse>> call, Response<List<SendResponse>> response) {
+                        if (response.isSuccessful()) {
+                            result_intent.clear();
+                            result = response.body();
+                            result_intent.addAll(result);
+//                            System.out.println('!');
+//                            for(int i = 0; i < result.size(); i++)
+//                                System.out.println(result.get(i).getNickname());
+//                            System.out.println('!');
+                            responseMessage.receiveFunc(user_number).enqueue(new Callback<List<ReceiveResponse>>(){
+                                @Override
+                                public void onResponse(Call<List<ReceiveResponse>> call, Response<List<ReceiveResponse>> response0) {
+                                    if (response0.isSuccessful()) {
+                                        result0_intent.clear();
+                                        result0 = response0.body();
+                                        result0_intent.addAll(result0);
+
+                                        Intent intent = new Intent(ProfileActivity.this, MsgActivity.class);
+                                        intent.putExtra("result_intent", result_intent);
+                                        intent.putExtra("result0_intent", result0_intent);
+                                        intent.putExtra("user_number", user_number);
+                                        startActivity(intent);
+                                    }
+                                    else{
+                                        Toast.makeText(getApplicationContext(), "profile activity error occurred", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<List<ReceiveResponse>> call, Throwable t) {
+                                    Toast.makeText(getApplicationContext(), "Response Fail", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), "profile activity error occurred", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<SendResponse>> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Response Fail", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

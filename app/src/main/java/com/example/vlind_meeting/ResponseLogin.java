@@ -14,6 +14,9 @@ interface ResponseLogin{
             @Query("user_number") String user_number
     );
 
+    @GET("/match_check")
+    Call<LoginMatchResponse> matchLogin(@Query("user_number") String user_number);
+
     @FormUrlEncoded
     @PUT("/retrofit/put/{id}")
     Call<ResponseBody> putFunc(@Path("id") String id, @Field("data") String data);

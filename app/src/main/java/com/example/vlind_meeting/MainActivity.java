@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private Button login_button;
     private Retrofit retrofit;
     private ResponseLogin responseLogin;
+    private ResponseMessage responseMessage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 else {
-                    //데이터베이스에서 정보를 가져와 비교해서 로그인 여부를 결정하는 코드 아직 작성 안됨
                     Call<LoginResponse> call_get = responseLogin.getLogin(user_number);
                     call_get.enqueue(new Callback<LoginResponse>() {
                         @Override
@@ -75,13 +75,6 @@ public class MainActivity extends AppCompatActivity {
                                 String exist_nickname = result.getNickname();
                                 String exist_name = result.getName();
                                 String exist_filename = result.getFilename();
-//                                System.out.println('!');
-//                                System.out.println(exist_name);
-//                                System.out.println(exist_filename);
-//                                System.out.println(exist_nickname);
-//                                System.out.println(exist_number);
-//                                System.out.println(exist_password);
-//                                System.out.println('!');
 
 
                                 if (exist_number.equals(user_number)) {
@@ -93,9 +86,41 @@ public class MainActivity extends AppCompatActivity {
                                         profileClass.setUser_name(exist_name);
                                         profileClass.setUser_filename(exist_filename);
 //                                        Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-                                        intent.putExtra("user_number", user_number);
-                                        startActivity(intent);
+
+
+                                        responseLogin = RetrofitClientInstance.getClient().create(ResponseLogin.class);
+                                        responseLogin.matchLogin(user_number).enqueue(new Callback<LoginMatchResponse>(){
+                                            @Override
+                                            public void onResponse(Call<LoginMatchResponse> call, Response<LoginMatchResponse> response) {
+                                                LoginMatchResponse resp = response.body();
+                                                String n = resp.getN();
+                                                String send_number = resp.getSend_number();
+                                                String receive_number = resp.getReceive_number();
+                                                String result = resp.getResult();
+                                                System.out.println(result);
+                                                Intent intent;
+                                                if(result.equals("success")) {
+                                                    System.out.println("@@@@@@@@@@@@@");
+                                                    intent = new Intent(MainActivity.this, FinalMatchActivity.class);
+                                                    intent.putExtra("n", n);
+                                                    //왼쪽에 내 이름이 나오도록 수정함.
+                                                    intent.putExtra("send_number", receive_number);
+                                                    intent.putExtra("receive_number", send_number);
+                                                }
+                                                else{
+                                                    System.out.println("!!!!!!!!!!!!!");
+                                                    intent = new Intent(MainActivity.this, ProfileActivity.class);
+                                                    intent.putExtra("user_number", user_number);
+                                                }
+                                                startActivity(intent);
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<LoginMatchResponse> call, Throwable t) {
+
+                                            }
+                                        });
+
                                     }
                                     else
                                         Toast.makeText(getApplicationContext(), "비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show();

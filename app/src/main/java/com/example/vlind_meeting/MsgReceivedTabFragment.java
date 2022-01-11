@@ -178,12 +178,7 @@ public class MsgReceivedTabFragment extends Fragment {
             //현재는 거절을 하면 recycler view item list에서 삭제하도록 만들어놨다.
             //이를 db에서 삭제로 바꾸면 됨
             @Override
-            public void o
-              
-              
-              
-              
-              DenyClick(View v, int position) {
+            public void onDenyClick(View v, int position) {
                 new AlertDialog.Builder(requireContext())
                         .setTitle("매칭 신청 거절")
                         .setMessage("매칭 신청을 거절하시겠습니까?")

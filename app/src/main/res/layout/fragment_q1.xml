@@ -29,7 +29,7 @@
             android:fontFamily="@font/basic_3"
             android:gravity="center"
             android:text="연인과 싸우고 나면&#10;바로 화해하는 편이다."
-            android:textSize="24dp"
+            android:textSize="22dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

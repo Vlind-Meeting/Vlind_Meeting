@@ -49,7 +49,7 @@ public class Q10Fragment extends Fragment {
         mbti = (EditText) viewgroup.findViewById(R.id.mbti);
 
         p_bar = (ProgressBar) viewgroup.findViewById(R.id.progressBar);
-        p_bar.setProgress(1);
+        p_bar.setProgress(10);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

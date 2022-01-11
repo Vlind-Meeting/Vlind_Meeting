@@ -10,10 +10,14 @@ import java.util.ArrayList;
 
 public class MsgTabAdapter extends FragmentPagerAdapter {
 
+    private MsgListener msgListener;
+    private String receive_number;
 
-    public MsgTabAdapter(@NonNull FragmentManager fm)
+    public MsgTabAdapter(@NonNull FragmentManager fm, MsgListener listener, String number)
     {
         super(fm);
+        msgListener = listener;
+        receive_number = number;
     }
 
 
@@ -22,9 +26,9 @@ public class MsgTabAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position)
     {
         if(position==0)
-            return new MsgSentTabFragment();
+            return new MsgSentTabFragment(msgListener);
         else
-            return new MsgReceivedTabFragment();
+            return new MsgReceivedTabFragment(msgListener, receive_number);
     }
 
     @Override

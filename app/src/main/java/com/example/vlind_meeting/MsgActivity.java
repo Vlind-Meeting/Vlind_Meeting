@@ -2,32 +2,31 @@ package com.example.vlind_meeting;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class MsgActivity extends AppCompatActivity {
+public class MsgActivity extends AppCompatActivity implements MsgListener{
 
     private Button profile_btn, match_btn;
 
     ResponseSurvey responseSurvey;
     private String filename1, filename2, filename3, nickname1, nickname2, nickname3, number1, number2, number3;
-
+    private ArrayList<SendResponse> items = new ArrayList<SendResponse>();
+    private ArrayList<ReceiveResponse> items0 = new ArrayList<ReceiveResponse>();
 
     ViewPager viewPager;
 
@@ -41,8 +40,10 @@ public class MsgActivity extends AppCompatActivity {
 
         Intent intent0 = getIntent();
         user_number = intent0.getExtras().getString("user_number");
+        items = (ArrayList<SendResponse>) intent0.getSerializableExtra("result_intent");
+        items0 = (ArrayList<ReceiveResponse>) intent0.getSerializableExtra("result0_intent");
         viewPager = findViewById(R.id.viewpager);
-        MsgTabAdapter adapter = new MsgTabAdapter(getSupportFragmentManager());
+        MsgTabAdapter adapter = new MsgTabAdapter(getSupportFragmentManager(), this, user_number);
         viewPager.setAdapter(adapter);
 
         TabLayout tabLayout = findViewById(R.id.tab_layout);
@@ -108,4 +109,53 @@ public class MsgActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public ArrayList<String> getSendNickNames() {
+        ArrayList<String> result = new ArrayList<String>();
+        for(int i = 0; i < items.size(); i++){
+            result.add(items.get(i).getNickname());
+        }
+        Collections.reverse(result);
+        return result;
+    }
+
+    @Override
+    public ArrayList<String> getSendNumbers() {
+        ArrayList<String> result = new ArrayList<String>();
+        for(int i = 0; i < items.size(); i++){
+            result.add(items.get(i).getUser_number());
+        }
+        Collections.reverse(result);
+        return result;
+    }
+
+    @Override
+    public ArrayList<String> getReceiveNickNames() {
+        ArrayList<String> result = new ArrayList<String>();
+        for(int i = 0; i < items0.size(); i++){
+            result.add(items0.get(i).getNickname());
+        }
+        Collections.reverse(result);
+        return result;
+    }
+
+    @Override
+    public ArrayList<String> getReceiveNumbers() {
+        ArrayList<String> result = new ArrayList<String>();
+        for(int i = 0; i < items0.size(); i++){
+            result.add(items0.get(i).getUser_number());
+        }
+        Collections.reverse(result);
+        return result;
+    }
+
+    @Override
+    public ArrayList<String> getReceiveFilenames() {
+        ArrayList<String> result = new ArrayList<String>();
+        for(int i = 0; i < items0.size(); i++){
+            result.add(items0.get(i).getFilename());
+        }
+        Collections.reverse(result);
+        return result;
+    }
 }

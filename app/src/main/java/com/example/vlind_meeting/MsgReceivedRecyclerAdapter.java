@@ -113,7 +113,7 @@ public class MsgReceivedRecyclerAdapter extends RecyclerView.Adapter<MsgReceived
             nickname.setText(item.getNickname());
             soundState.setText(item.getSoundState());
             soundInfo.setText(item.getSoundInfo());
-            n = item.getN();
+//            n = item.getN();
         }
     }
 }

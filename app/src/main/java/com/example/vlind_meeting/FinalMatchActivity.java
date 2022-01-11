@@ -27,12 +27,16 @@ public class FinalMatchActivity extends AppCompatActivity {
     private GifDrawable gif;
     private ImageView place_map;
     private TextView place_info;
-    private ImageView location_icon, time_icon;
 
+    private String n0, send_number, receive_number;
+    private int n;
+    List<Integer> placeNum = new ArrayList<Integer>();
     List<String> placeName = new ArrayList<String>();
     List<String> placeURL = new ArrayList<String>();
-    int n;
-    Intent i = new Intent(Intent.ACTION_VIEW);
+    TextView text_nickname;
+    TextView text_match_nickname;
+    private ImageView location_icon, time_icon;
+
     private long backpressedTime = 0;
 
     @Override
@@ -40,10 +44,24 @@ public class FinalMatchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_match);
 
+
+        Intent intent = getIntent();
+        n0 = intent.getExtras().getString("n");
+        n = Integer.parseInt(n0);
+        send_number = intent.getExtras().getString("send_number");
+        receive_number = intent.getExtras().getString("receive_number");
+
+        text_nickname = (TextView) findViewById(R.id.user_nickname);
+        text_match_nickname = (TextView) findViewById(R.id.matched_nickname);
+
+        text_nickname.setText(receive_number);
+        text_match_nickname.setText(send_number);
+
         location_icon = (ImageView) findViewById(R.id.location_icon);
         time_icon = (ImageView) findViewById(R.id.time_icon);
         location_icon.setColorFilter(getResources().getColor(R.color.tiffany));
         time_icon.setColorFilter(getResources().getColor(R.color.tiffany));
+
 
         try {
             gif = new GifDrawable(getResources(), R.drawable.match_success);
@@ -88,10 +106,9 @@ public class FinalMatchActivity extends AppCompatActivity {
 
         placeName.add("비바릴리 도안점");
         placeURL.add("http://naver.me/xZDOT1lg");
-
-        //여기서 n값 데이터베이스에서 가져오기
-        n=0;
         place_info.setText(placeName.get(n));
+
+        Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(placeURL.get(n)));
 
         place_map.setOnClickListener(new View.OnClickListener() {

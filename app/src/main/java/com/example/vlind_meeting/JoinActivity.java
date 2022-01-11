@@ -115,7 +115,7 @@ public class JoinActivity extends AppCompatActivity {
                                                     .show();
                                         }
                                         else{
-                                            Toast.makeText(getApplicationContext(), "중복된 전화번호입니다.", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "이미 등록된 전화번호입니다.", Toast.LENGTH_SHORT).show();
                                         }
                                         Log.v(TAG, "result = " + result);
                                     } catch (IOException e) {

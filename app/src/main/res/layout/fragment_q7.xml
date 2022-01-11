@@ -36,7 +36,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.152" />
+            app:layout_constraintVertical_bias="0.138" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
@@ -45,11 +45,11 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="0.43"
-            app:layout_constraintVertical_bias="0.842">
+            app:layout_constraintVertical_bias="0.876">
 
             <RadioButton
                 android:id="@+id/radioButton5"
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/basic_font_3"
-                android:text="바빠서 갈 수 없는 상황을 설명하고&#10;알아서 오라고 한다."
+                android:text="바빠서 갈 수 없는 상황을&#10;설명하고 알아서 오라고 한다."
                 android:textSize="13dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -82,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/basic_font_3"
-                android:text="마중나갈지 안갈지 고민하다가&#10;눈치보고 결정한다."
+                android:text="마중나갈지 안갈지&#10;고민하다가 눈치보고 결정한다."
                 android:textSize="13dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -95,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/basic_font_3"
-                android:text="바쁘지만 안가면 서운해할 것 같으므로 마중나간다."
+                android:text="바쁘지만 안가면&#10;서운해할 것 같으므로 마중나간다."
                 android:textSize="13dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
